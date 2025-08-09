@@ -21,11 +21,11 @@ export function Footer() {
   return (
     <>
       <footer className="border-t bg-background">
-        <div className="container mx-auto px-4 py-2">
+        <div className="w-full px-4 py-2">
           {/* Main Footer Content */}
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-2">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-2 max-w-full">
             {/* Logo and Copyright */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 lg:justify-start">
               <Image
                 src="/ntq-logo.png"
                 alt="NTQ Logo"
@@ -48,7 +48,7 @@ export function Footer() {
             </div>
 
             {/* Product Information */}
-            <div className="text-xs text-muted-foreground text-center lg:text-right">
+            <div className="text-xs text-muted-foreground text-center lg:text-right lg:justify-end">
               <p>
                 A product of{' '}
                 <Link
@@ -66,7 +66,7 @@ export function Footer() {
           </div>
 
           {/* Legal Links */}
-          <div className="mt-2 pt-2 border-t flex flex-col sm:flex-row items-center justify-between gap-2">
+          <div className="mt-2 pt-2 border-t flex flex-col sm:flex-row items-center justify-between gap-2 max-w-full">
             <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
               <Button
                 variant="link"
@@ -97,10 +97,10 @@ export function Footer() {
             <div className="text-xs text-muted-foreground">
               Need help? Contact{' '}
               <a
-                href="mailto:support@ntq-solution.com"
+                href="mailto:support@ntq-solution.com.vn"
                 className="text-primary hover:underline"
               >
-                support@ntq-solution.com
+                support@ntq-solution.com.vn
               </a>
             </div>
           </div>
