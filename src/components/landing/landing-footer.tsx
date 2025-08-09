@@ -159,12 +159,6 @@ export function LandingFooter() {
               >
                 Privacy Rights
               </button>
-              <Link href="#" className="text-gray-400 hover:text-white transition-colors">
-                Security
-              </Link>
-              <Link href="#" className="text-gray-400 hover:text-white transition-colors">
-                Compliance
-              </Link>
             </div>
 
             {/* Copyright */}

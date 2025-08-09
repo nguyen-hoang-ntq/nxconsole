@@ -8,12 +8,10 @@ import {
   HeroSection,
   FeaturesSection,
   BenefitsSection,
-  SocialProofSection,
   PricingSection,
   AboutSection,
   CtaSection
 } from '@/components/landing';
-import { CloudAnimationSection } from '@/components/landing/cloud-animation-section';
 import { Loader2 } from 'lucide-react';
 
 export default function HomePage() {
@@ -48,9 +46,7 @@ export default function HomePage() {
       <LandingLayout>
         <HeroSection />
         <FeaturesSection />
-        <CloudAnimationSection />
         <BenefitsSection />
-        <SocialProofSection />
         <PricingSection />
         <AboutSection />
         <CtaSection />
