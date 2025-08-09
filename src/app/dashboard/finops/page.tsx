@@ -3,7 +3,7 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Plus, Download, Settings } from 'lucide-react';
+import { Plus, Download, Settings, BarChart3 } from 'lucide-react';
 import { CostCharts } from '@/components/finops/cost-charts';
 import { BudgetTracker } from '@/components/finops/budget-tracker';
 import { mockCostDataItems, mockBudgets } from '@/lib/mock-data';
@@ -114,7 +114,7 @@ export default function FinOpsPage() {
             </Button>
             
             <Button variant="outline" className="h-20 flex-col">
-              <span className="text-lg mb-1">📊</span>
+              <BarChart3 className="h-6 w-6 mb-2" />
               <span>Custom Report</span>
             </Button>
           </div>

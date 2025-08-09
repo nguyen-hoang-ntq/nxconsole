@@ -7,6 +7,8 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { LegalModal } from '@/components/legal/legal-modal';
+import { PrivacyPolicyContent, TermsOfServiceContent, PrivacyRightsContent } from '@/components/legal/legal-content';
 import { 
   Search, 
   HelpCircle, 
@@ -111,12 +113,21 @@ const mockVideos = [
 
 export default function HelpPage() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [openModal, setOpenModal] = useState<string | null>(null);
   const [newTicket, setNewTicket] = useState({
     title: '',
     category: 'technical',
     priority: 'medium',
     description: ''
   });
+
+  const handleOpenModal = (modal: string) => {
+    setOpenModal(modal);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(null);
+  };
 
   const filteredArticles = mockArticles.filter(article =>
     article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -395,8 +406,19 @@ export default function HelpPage() {
                   <h4 className="font-medium">Contact Information</h4>
                   <p className="text-muted-foreground">
                     For privacy-related questions, contact our Data Protection Officer at 
-                    privacy@ntqsolution.com.vn
+                    privacy@ntq-solution.com.vn
                   </p>
+                </div>
+                
+                <div className="pt-4 border-t">
+                  <Button 
+                    variant="outline" 
+                    className="w-full"
+                    onClick={() => handleOpenModal('privacy-policy')}
+                  >
+                    <FileText className="h-4 w-4 mr-2" />
+                    View Full Privacy Policy
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -435,6 +457,17 @@ export default function HelpPage() {
                     12 months, except where prohibited by law.
                   </p>
                 </div>
+                
+                <div className="pt-4 border-t">
+                  <Button 
+                    variant="outline" 
+                    className="w-full"
+                    onClick={() => handleOpenModal('terms-of-service')}
+                  >
+                    <Scale className="h-4 w-4 mr-2" />
+                    View Full Terms of Service
+                  </Button>
+                </div>
               </CardContent>
             </Card>
 
@@ -469,14 +502,18 @@ export default function HelpPage() {
                   <h4 className="font-medium">Data Requests</h4>
                   <p className="text-muted-foreground">
                     To exercise your privacy rights or request data deletion, 
-                    contact support@ntqsolution.com.vn with your request details.
+                    contact support@ntq-solution.com.vn with your request details.
                   </p>
                 </div>
                 
                 <div className="pt-4 border-t">
-                  <Button variant="outline" className="w-full">
-                    <Download className="h-4 w-4 mr-2" />
-                    Download Full Legal Documents
+                  <Button 
+                    variant="outline" 
+                    className="w-full"
+                    onClick={() => handleOpenModal('privacy-rights')}
+                  >
+                    <Shield className="h-4 w-4 mr-2" />
+                    View Full Privacy Rights
                   </Button>
                 </div>
               </CardContent>
@@ -491,12 +528,12 @@ export default function HelpPage() {
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <h4 className="font-medium mb-2">NTQ Solution Co., Ltd.</h4>
+                  <h4 className="font-medium mb-2">NTQ Solution JSC</h4>
                   <div className="space-y-1 text-sm text-muted-foreground">
-                    <p>Headquarters: Ho Chi Minh City, Vietnam</p>
-                    <p>Global Offices: 15+ locations worldwide</p>
-                    <p>Legal Department: legal@ntqsolution.com.vn</p>
-                    <p>Data Protection Officer: privacy@ntqsolution.com.vn</p>
+                    <p>Headquarters: 10F, Tower B, Song Da Building (HH4), Pham Hung Street, My Dinh 1 Ward, Nam Tu Liem District, Hanoi</p>
+                    <p>Global Offices: 8+ locations worldwide</p>
+                    <p>Legal Department: legal@ntq-solution.com.vn</p>
+                    <p>Data Protection Officer: privacy@ntq-solution.com.vn</p>
                   </div>
                 </div>
                 <div>
@@ -538,6 +575,34 @@ export default function HelpPage() {
           </Card>
         </TabsContent>
       </Tabs>
+
+      {/* Legal Modals */}
+      <LegalModal
+        isOpen={openModal === 'privacy-policy'}
+        onClose={handleCloseModal}
+        title="Privacy Policy"
+        lastUpdated="January 9, 2025"
+      >
+        <PrivacyPolicyContent />
+      </LegalModal>
+
+      <LegalModal
+        isOpen={openModal === 'terms-of-service'}
+        onClose={handleCloseModal}
+        title="Terms of Service"
+        lastUpdated="January 9, 2025"
+      >
+        <TermsOfServiceContent />
+      </LegalModal>
+
+      <LegalModal
+        isOpen={openModal === 'privacy-rights'}
+        onClose={handleCloseModal}
+        title="Privacy Rights"
+        lastUpdated="January 9, 2025"
+      >
+        <PrivacyRightsContent />
+      </LegalModal>
     </div>
   );
 }

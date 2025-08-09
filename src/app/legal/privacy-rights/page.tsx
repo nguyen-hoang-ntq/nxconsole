@@ -113,7 +113,7 @@ export default function PrivacyRightsPage() {
               <div>
                 <h4 className="font-medium mb-2">Primary Contact</h4>
                 <ul className="text-sm space-y-1">
-                  <li><strong>Email:</strong> privacy@ntq-solution.com</li>
+                  <li><strong>Email:</strong> privacy@ntq-solution.com.vn</li>
                   <li><strong>Subject Line:</strong> &quot;Privacy Rights Request&quot;</li>
                   <li><strong>Response Time:</strong> Within 30 days</li>
                 </ul>
@@ -121,7 +121,7 @@ export default function PrivacyRightsPage() {
               <div>
                 <h4 className="font-medium mb-2">Data Protection Officer</h4>
                 <ul className="text-sm space-y-1">
-                  <li><strong>Email:</strong> dpo@ntq-solution.com</li>
+                  <li><strong>Email:</strong> dpo@ntq-solution.com.vn</li>
                   <li><strong>Role:</strong> Privacy compliance oversight</li>
                   <li><strong>Availability:</strong> Business hours (GMT+7)</li>
                 </ul>
@@ -327,7 +327,7 @@ export default function PrivacyRightsPage() {
             <div>
               <h3 className="font-medium mb-2">Privacy Team</h3>
               <ul className="text-sm space-y-1">
-                <li><strong>Email:</strong> privacy@ntq-solution.com</li>
+                <li><strong>Email:</strong> privacy@ntq-solution.com.vn</li>
                 <li><strong>Subject:</strong> Privacy Rights Inquiry</li>
                 <li><strong>Website:</strong> <a href="https://ntq.com.vn" className="text-primary hover:underline">https://ntq.com.vn</a></li>
               </ul>
@@ -335,7 +335,7 @@ export default function PrivacyRightsPage() {
             <div>
               <h3 className="font-medium mb-2">Data Protection Officer</h3>
               <ul className="text-sm space-y-1">
-                <li><strong>Email:</strong> dpo@ntq-solution.com</li>
+                <li><strong>Email:</strong> dpo@ntq-solution.com.vn</li>
                 <li><strong>Response Time:</strong> Within 30 days</li>
                 <li><strong>Languages:</strong> English, Vietnamese</li>
               </ul>

@@ -161,9 +161,9 @@ export default function PrivacyPolicyPage() {
           </p>
           <div className="mt-4 p-4 bg-muted rounded-lg">
             <p><strong>NTQ Solution JSC</strong></p>
-            <p>Email: privacy@ntq-solution.com</p>
+            <p>Email: privacy@ntq-solution.com.vn</p>
             <p>Website: <a href="https://ntq.com.vn" className="text-primary hover:underline">https://ntq.com.vn</a></p>
-            <p>Data Protection Officer: dpo@ntq-solution.com</p>
+            <p>Data Protection Officer: dpo@ntq-solution.com.vn</p>
           </div>
         </section>
 

@@ -103,9 +103,9 @@ export function PrivacyPolicyContent() {
         </p>
         <div className="mt-4 p-4 bg-muted rounded-lg">
           <p><strong>NTQ Solution JSC</strong></p>
-          <p>Email: privacy@ntq-solution.com</p>
+          <p>Email: privacy@ntq-solution.com.vn</p>
           <p>Website: <a href="https://ntq.com.vn" className="text-primary hover:underline">https://ntq.com.vn</a></p>
-          <p>Data Protection Officer: dpo@ntq-solution.com</p>
+          <p>Data Protection Officer: dpo@ntq-solution.com.vn</p>
         </div>
       </section>
     </div>
@@ -192,7 +192,7 @@ export function TermsOfServiceContent() {
         </p>
         <div className="mt-4 p-4 bg-muted rounded-lg">
           <p><strong>NTQ Solution JSC</strong></p>
-          <p>Email: legal@ntq-solution.com</p>
+          <p>Email: legal@ntq-solution.com.vn</p>
           <p>Website: <a href="https://ntq.com.vn" className="text-primary hover:underline">https://ntq.com.vn</a></p>
           <p>Business Hours: Monday - Friday, 9:00 AM - 6:00 PM (Vietnam Time)</p>
         </div>
@@ -288,7 +288,7 @@ export function PrivacyRightsContent() {
             <div>
               <h4 className="font-medium mb-2">Primary Contact</h4>
               <ul className="text-sm space-y-1">
-                <li><strong>Email:</strong> privacy@ntq-solution.com</li>
+                <li><strong>Email:</strong> privacy@ntq-solution.com.vn</li>
                 <li><strong>Subject Line:</strong> &quot;Privacy Rights Request&quot;</li>
                 <li><strong>Response Time:</strong> Within 30 days</li>
               </ul>
@@ -296,7 +296,7 @@ export function PrivacyRightsContent() {
             <div>
               <h4 className="font-medium mb-2">Data Protection Officer</h4>
               <ul className="text-sm space-y-1">
-                <li><strong>Email:</strong> dpo@ntq-solution.com</li>
+                <li><strong>Email:</strong> dpo@ntq-solution.com.vn</li>
                 <li><strong>Role:</strong> Privacy compliance oversight</li>
                 <li><strong>Availability:</strong> Business hours (GMT+7)</li>
               </ul>
@@ -314,7 +314,7 @@ export function PrivacyRightsContent() {
           <div>
             <h3 className="font-medium mb-2">Privacy Team</h3>
             <ul className="text-sm space-y-1">
-              <li><strong>Email:</strong> privacy@ntq-solution.com</li>
+              <li><strong>Email:</strong> privacy@ntq-solution.com.vn</li>
               <li><strong>Subject:</strong> Privacy Rights Inquiry</li>
               <li><strong>Website:</strong> <a href="https://ntq.com.vn" className="text-primary hover:underline">https://ntq.com.vn</a></li>
             </ul>
@@ -322,7 +322,7 @@ export function PrivacyRightsContent() {
           <div>
             <h3 className="font-medium mb-2">Data Protection Officer</h3>
             <ul className="text-sm space-y-1">
-              <li><strong>Email:</strong> dpo@ntq-solution.com</li>
+              <li><strong>Email:</strong> dpo@ntq-solution.com.vn</li>
               <li><strong>Response Time:</strong> Within 30 days</li>
               <li><strong>Languages:</strong> English, Vietnamese</li>
             </ul>

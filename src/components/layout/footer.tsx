@@ -21,17 +21,17 @@ export function Footer() {
   return (
     <>
       <footer className="border-t bg-background">
-        <div className="container mx-auto px-4 py-6">
+        <div className="container mx-auto px-4 py-2">
           {/* Main Footer Content */}
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-2">
             {/* Logo and Copyright */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
               <Image
                 src="/ntq-logo.png"
                 alt="NTQ Logo"
                 width={24}
                 height={24}
-                className="h-6 w-6 dark:hidden"
+                className="h-5 w-5 dark:hidden"
                 style={{ objectFit: 'contain' }}
               />
               <Image
@@ -39,21 +39,21 @@ export function Footer() {
                 alt="NTQ Logo"
                 width={24}
                 height={24}
-                className="h-6 w-6 hidden dark:block"
+                className="h-5 w-5 hidden dark:block"
                 style={{ objectFit: 'contain' }}
               />
-              <div className="text-sm text-muted-foreground">
+              <div className="text-xs text-muted-foreground">
                 © 2025 NTQ Solution. All rights reserved.
               </div>
             </div>
-            
+
             {/* Product Information */}
-            <div className="text-sm text-muted-foreground text-center lg:text-right">
+            <div className="text-xs text-muted-foreground text-center lg:text-right">
               <p>
                 A product of{' '}
-                <Link 
-                  href="https://www.nxuniverse.cloud/" 
-                  target="_blank" 
+                <Link
+                  href="https://www.nxuniverse.cloud/"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary hover:underline font-medium"
                 >
@@ -62,13 +62,12 @@ export function Footer() {
                 {' '}ecosystem by{' '}
                 <span className="font-medium">NTQ Solution</span>
               </p>
-              <p className="text-xs mt-1">Global IT Service Provider | 1,500+ Employees | 350+ Clients | 30 Industries</p>
             </div>
           </div>
 
           {/* Legal Links */}
-          <div className="mt-4 pt-4 border-t flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
+          <div className="mt-2 pt-2 border-t flex flex-col sm:flex-row items-center justify-between gap-2">
+            <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
               <Button
                 variant="link"
                 size="sm"
@@ -94,11 +93,11 @@ export function Footer() {
                 Privacy Rights
               </Button>
             </div>
-            
+
             <div className="text-xs text-muted-foreground">
               Need help? Contact{' '}
-              <a 
-                href="mailto:support@ntq-solution.com" 
+              <a
+                href="mailto:support@ntq-solution.com"
                 className="text-primary hover:underline"
               >
                 support@ntq-solution.com
