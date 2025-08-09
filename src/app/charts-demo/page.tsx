@@ -121,7 +121,7 @@ export default function ChartsDemo() {
           height={500}
           showExport={true}
           formatTooltip={(value, name) => [`$${value.toLocaleString()}`, name]}
-          formatYAxis={(value) => `$${(value / 1000).toFixed(0)}K`}
+          formatYAxis={(value) => `$${(Number(value) / 1000).toFixed(0)}K`}
         />
       </div>
 

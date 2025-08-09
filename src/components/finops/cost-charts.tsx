@@ -100,7 +100,7 @@ export function CostCharts({ costData, loading = false }: CostChartsProps) {
   const previousAvg = previousCosts.reduce((sum, item) => sum + item.cost, 0) / previousCosts.length;
   const trend = ((recentAvg - previousAvg) / previousAvg) * 100;
 
-  const CustomTooltip = ({ active, payload, label }: any) => {
+  const CustomTooltip = ({ active, payload, label }: { active?: boolean; payload?: Array<{ name: string; value: number; color: string }>; label?: string }) => {
     if (active && payload && payload.length) {
       return (
         <div className="bg-background border rounded-lg shadow-lg p-3">

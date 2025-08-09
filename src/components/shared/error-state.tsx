@@ -104,7 +104,7 @@ export function EmptyState({
   message,
   action
 }: {
-  icon?: React.ComponentType<any>;
+  icon?: React.ComponentType<{ className?: string }>;
   title: string;
   message: string;
   action?: React.ReactNode;

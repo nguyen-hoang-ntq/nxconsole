@@ -35,7 +35,7 @@ interface AuditEvent {
   description: string;
   ipAddress: string;
   userAgent?: string;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, string | number | boolean | string[]>;
 }
 
 interface AuditTrailProps {

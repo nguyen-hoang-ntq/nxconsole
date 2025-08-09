@@ -54,7 +54,7 @@ export default function PrivacyRightsPage() {
               <div className="border rounded-lg p-4">
                 <h3 className="text-lg font-medium mb-2 text-red-700 dark:text-red-300">Right to Erasure</h3>
                 <p className="text-sm">
-                  Also known as the "right to be forgotten," you may request deletion 
+                  Also known as the &quot;right to be forgotten,&quot; you may request deletion 
                   of your personal data under certain circumstances.
                 </p>
               </div>
@@ -114,7 +114,7 @@ export default function PrivacyRightsPage() {
                 <h4 className="font-medium mb-2">Primary Contact</h4>
                 <ul className="text-sm space-y-1">
                   <li><strong>Email:</strong> privacy@ntq-solution.com</li>
-                  <li><strong>Subject Line:</strong> "Privacy Rights Request"</li>
+                  <li><strong>Subject Line:</strong> &quot;Privacy Rights Request&quot;</li>
                   <li><strong>Response Time:</strong> Within 30 days</li>
                 </ul>
               </div>

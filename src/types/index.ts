@@ -72,7 +72,7 @@ export interface Resource {
   region?: string;
   status: 'running' | 'stopped' | 'error' | 'pending';
   tags: Record<string, string>;
-  metadata: Record<string, any>;
+  metadata: Record<string, string | number | boolean>;
   cost?: {
     monthly: number;
     currency: string;
@@ -108,7 +108,7 @@ export interface AuditEvent {
   description: string;
   ipAddress: string;
   userAgent?: string;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, string | number | boolean>;
 }
 
 export interface ComplianceCheck {
@@ -185,7 +185,7 @@ export interface AIInsight {
   priority: 'low' | 'medium' | 'high';
   recommendation?: string;
   recommendations: string[];
-  data?: any;
+  data?: Record<string, string | number | boolean>;
   timestamp: Date;
 }
 
@@ -196,7 +196,7 @@ export interface ChatMessage {
   timestamp: Date;
   metadata?: {
     suggestions?: string[];
-    charts?: any[];
+    charts?: Array<Record<string, string | number>>;
     actions?: string[];
   };
 }
@@ -217,7 +217,7 @@ export interface ApiResponse<T> {
 export interface ApiError {
   code: string;
   message: string;
-  details?: any;
+  details?: Record<string, string | number | boolean>;
 }
 
 // Component Props Types
@@ -230,7 +230,7 @@ export interface MetricCardProps {
     period: string;
   };
   trend?: 'up' | 'down' | 'neutral';
-  icon?: React.ComponentType<any>;
+  icon?: React.ComponentType<{ className?: string }>;
   loading?: boolean;
 }
 
@@ -246,7 +246,7 @@ export interface NavigationItem {
   id: string;
   label: string;
   href: string;
-  icon: React.ComponentType<any> | (() => React.ReactNode);
+  icon: React.ComponentType<{ className?: string }> | (() => React.ReactNode);
   children?: NavigationItem[];
   badge?: {
     text: string;

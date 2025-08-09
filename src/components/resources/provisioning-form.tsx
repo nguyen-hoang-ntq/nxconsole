@@ -81,7 +81,7 @@ export function ProvisioningForm({ onClose }: ProvisioningFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
 
-  const updateFormData = (field: string, value: any) => {
+  const updateFormData = (field: string, value: string | number | boolean) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
@@ -140,7 +140,7 @@ export function ProvisioningForm({ onClose }: ProvisioningFormProps) {
           </div>
           <h3 className="text-xl font-semibold mb-2">Resource Provisioning Submitted</h3>
           <p className="text-muted-foreground mb-6">
-            Your resource "{formData.name}" has been submitted for {formData.approvalRequired ? 'approval' : 'deployment'}.
+            Your resource &quot;{formData.name}&quot; has been submitted for {formData.approvalRequired ? 'approval' : 'deployment'}.
             You will receive a notification when the process is complete.
           </p>
           <div className="space-y-2 text-sm">

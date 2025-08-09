@@ -5,14 +5,14 @@ import { ChartContainer } from './chart-container';
 import { Badge } from '@/components/ui/badge';
 import { Calendar, Clock, User, AlertCircle, CheckCircle, XCircle } from 'lucide-react';
 
-interface TimelineEvent {
+export interface TimelineEvent {
   id: string;
   title: string;
   description?: string;
   timestamp: Date;
   type?: 'success' | 'warning' | 'error' | 'info' | 'default';
   user?: string;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, string | number | boolean | string[]>;
   duration?: number; // in minutes
   status?: 'completed' | 'in-progress' | 'failed' | 'pending';
 }

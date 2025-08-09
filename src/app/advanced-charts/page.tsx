@@ -5,6 +5,7 @@ import {
   HeatmapComponent,
   GaugeChartComponent,
   TimelineComponent,
+  type TimelineEvent,
   MetricWidget,
   ProgressWidget,
   StatusWidget,
@@ -31,7 +32,7 @@ const heatmapData = [
   { x: 'Fri', y: 'Disk', value: 73 }
 ];
 
-const timelineEvents = [
+const timelineEvents: TimelineEvent[] = [
   {
     id: '1',
     title: 'System Maintenance Completed',
@@ -71,7 +72,7 @@ const timelineEvents = [
     user: 'Registration System',
     status: 'completed' as const
   }
-];
+] satisfies TimelineEvent[];
 
 const serverStatuses = [
   { label: 'Web Server 01', status: 'online' as const, value: '99.9%', lastUpdated: new Date() },

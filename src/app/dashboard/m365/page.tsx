@@ -39,8 +39,8 @@ export default function M365Page() {
   const totalLicenses = mockLicenses.length;
   const assignedLicenses = mockLicenses.filter(l => l.assigned).length;
   const totalTeams = mockTeams.length;
-  const activeTeams = mockTeams.filter((t: any) => !t.archived).length;
-  const totalMembers = mockTeams.reduce((sum: number, t: any) => sum + t.memberCount, 0);
+  const activeTeams = mockTeams.filter((t: { archived?: boolean }) => !t.archived).length;
+  const totalMembers = mockTeams.reduce((sum: number, t: { memberCount: number }) => sum + t.memberCount, 0);
   const monthlyCost = mockLicenses.reduce((sum, l) => sum + l.cost, 0);
 
   return (

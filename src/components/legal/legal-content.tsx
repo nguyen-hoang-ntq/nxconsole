@@ -6,9 +6,9 @@ export function PrivacyPolicyContent() {
       <section>
         <h2 className="text-2xl font-semibold mb-4">Introduction</h2>
         <p>
-          NTQ Solution JSC ("NTQ Solution," "we," "us," or "our") is committed to protecting your privacy and personal information. 
+          NTQ Solution JSC (&quot;NTQ Solution,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) is committed to protecting your privacy and personal information. 
           This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use NxConsole, 
-          our cloud management platform and related services ("Services").
+          our cloud management platform and related services (&quot;Services&quot;).
         </p>
         <p className="mt-4">
           NTQ Solution is a leading global IT service provider with over 14 years of experience in developing ICT solutions 
@@ -118,9 +118,9 @@ export function TermsOfServiceContent() {
       <section>
         <h2 className="text-2xl font-semibold mb-4">Agreement to Terms</h2>
         <p>
-          These Terms of Service ("Terms") constitute a legally binding agreement between you ("Customer," "you," or "your") 
-          and NTQ Solution JSC ("NTQ Solution," "Company," "we," "us," or "our") regarding your use of NxConsole, 
-          our cloud management platform and related services ("Services").
+          These Terms of Service (&quot;Terms&quot;) constitute a legally binding agreement between you (&quot;Customer,&quot; &quot;you,&quot; or &quot;your&quot;) 
+          and NTQ Solution JSC (&quot;NTQ Solution,&quot; &quot;Company,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) regarding your use of NxConsole, 
+          our cloud management platform and related services (&quot;Services&quot;).
         </p>
         <p className="mt-4">
           By accessing or using our Services, you agree to be bound by these Terms. If you do not agree to these Terms, 
@@ -245,7 +245,7 @@ export function PrivacyRightsContent() {
             <div className="border rounded-lg p-4">
               <h3 className="text-lg font-medium mb-2 text-red-700 dark:text-red-300">Right to Erasure</h3>
               <p className="text-sm">
-                Also known as the "right to be forgotten," you may request deletion 
+                Also known as the &quot;right to be forgotten,&quot; you may request deletion 
                 of your personal data under certain circumstances.
               </p>
             </div>
@@ -289,7 +289,7 @@ export function PrivacyRightsContent() {
               <h4 className="font-medium mb-2">Primary Contact</h4>
               <ul className="text-sm space-y-1">
                 <li><strong>Email:</strong> privacy@ntq-solution.com</li>
-                <li><strong>Subject Line:</strong> "Privacy Rights Request"</li>
+                <li><strong>Subject Line:</strong> &quot;Privacy Rights Request&quot;</li>
                 <li><strong>Response Time:</strong> Within 30 days</li>
               </ul>
             </div>

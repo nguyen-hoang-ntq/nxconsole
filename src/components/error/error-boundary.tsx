@@ -250,7 +250,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
 }
 
 // HOC for wrapping components with error boundary
-export function withErrorBoundary<P extends {}>(
+export function withErrorBoundary<P extends Record<string, unknown>>(
   WrappedComponent: React.ComponentType<P>,
   errorBoundaryProps?: Omit<ErrorBoundaryProps, 'children'>
 ) {

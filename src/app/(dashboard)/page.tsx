@@ -1,11 +1,27 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+
+interface DashboardMetrics {
+  totalResources: number;
+  activeAlerts: number;
+  totalUsers: number;
+  complianceScore: number;
+  lastUpdated: Date;
+}
+
+interface CostHistoryItem {
+  period: string;
+  total: number;
+  aws: number;
+  azure: number;
+  m365: number;
+}
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { MetricCard } from '@/components/dashboard/metric-card';
-import { ChartContainer } from '@/components/charts/chart-container';
 import { LoadingState } from '@/components/shared/loading-state';
 import { 
   DollarSign, 
@@ -24,8 +40,8 @@ import Link from 'next/link';
 
 export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
-  const [metrics, setMetrics] = useState<any>(null);
-  const [costHistory, setCostHistory] = useState<any[]>([]);
+  const [metrics, setMetrics] = useState<DashboardMetrics | null>(null);
+  const [costHistory, setCostHistory] = useState<CostHistoryItem[]>([]);
   const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
   
   // Simulate data loading
@@ -75,7 +91,7 @@ export default function DashboardPage() {
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
           <p className="text-muted-foreground">
-            Welcome back! Here's what's happening with your cloud infrastructure.
+            Welcome back! Here&apos;s what&apos;s happening with your cloud infrastructure.
           </p>
         </div>
         <div className="flex items-center gap-3">
@@ -99,7 +115,7 @@ export default function DashboardPage() {
             type: 'increase',
             period: 'last month'
           }}
-          trend={mockData.costData.previousPeriod?.changePercent! > 0 ? 'down' : 'up'}
+          trend={(mockData.costData.previousPeriod?.changePercent ?? 0) > 0 ? 'down' : 'up'}
           icon={DollarSign}
           loading={loading}
         />

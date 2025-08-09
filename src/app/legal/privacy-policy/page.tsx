@@ -16,9 +16,9 @@ export default function PrivacyPolicyPage() {
         <section>
           <h2 className="text-2xl font-semibold mb-4">Introduction</h2>
           <p>
-            NTQ Solution JSC ("NTQ Solution," "we," "us," or "our") is committed to protecting your privacy and personal information. 
+            NTQ Solution JSC (&quot;NTQ Solution,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) is committed to protecting your privacy and personal information. 
             This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use NxConsole, 
-            our cloud management platform and related services ("Services").
+            our cloud management platform and related services (&quot;Services&quot;).
           </p>
           <p className="mt-4">
             NTQ Solution is a leading global IT service provider with over 14 years of experience in developing ICT solutions 
@@ -171,13 +171,13 @@ export default function PrivacyPolicyPage() {
           <h2 className="text-2xl font-semibold mb-4">Changes to This Privacy Policy</h2>
           <p>
             We may update this Privacy Policy from time to time. We will notify you of any material changes by posting 
-            the new Privacy Policy on this page and updating the "Last Updated" date. Your continued use of our services 
+            the new Privacy Policy on this page and updating the &quot;Last Updated&quot; date. Your continued use of our services 
             after such changes constitutes acceptance of the updated policy.
           </p>
         </section>
 
         <section className="bg-muted p-6 rounded-lg">
-          <h2 className="text-xl font-semibold mb-4">About NTQ Solution's Quality Commitment</h2>
+          <h2 className="text-xl font-semibold mb-4">About NTQ Solution&apos;s Quality Commitment</h2>
           <p className="text-sm">
             With 760+ successful projects and a commitment to delivering world-class products and services, 
             NTQ Solution maintains the highest standards of data protection and privacy. Our goal is to exceed 

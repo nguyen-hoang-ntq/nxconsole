@@ -24,7 +24,7 @@ interface HeatmapComponentProps {
   maxValue?: number;
   cellSize?: number;
   gap?: number;
-  formatTooltip?: (value: number, x: any, y: any) => string;
+  formatTooltip?: (value: number, x: string | number, y: string | number) => string;
   formatValue?: (value: number) => string;
   onCellClick?: (data: HeatmapData) => void;
 }
@@ -81,7 +81,7 @@ export function HeatmapComponent({
     dataLookup.set(key, item);
   });
 
-  const CustomTooltip = ({ active, payload, coordinate }: any) => {
+  const CustomTooltip = ({ active, coordinate }: { active?: boolean; payload?: unknown; coordinate?: { x: number; y: number } }) => {
     if (active && coordinate) {
       // Find the nearest cell based on coordinate
       const cellX = Math.floor((coordinate.x - 50) / (cellSize + gap));

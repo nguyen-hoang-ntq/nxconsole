@@ -749,7 +749,7 @@ export const mockAuditEvents: AuditEvent[] = [
     ipAddress: '172.16.0.10',
     userAgent: 'aws-sdk-js/3.0.0',
     metadata: {
-      policies: ['AmazonS3ReadOnlyAccess', 'CloudWatchLogsFullAccess']
+      policies: 'AmazonS3ReadOnlyAccess,CloudWatchLogsFullAccess'
     }
   },
   {

@@ -419,7 +419,7 @@ export default function HelpPage() {
                   
                   <h4 className="font-medium">Acceptable Use</h4>
                   <p className="text-muted-foreground">
-                    You may use NxConsole only for lawful purposes and in accordance with your organization's 
+                    You may use NxConsole only for lawful purposes and in accordance with your organization&apos;s 
                     policies. Prohibited activities include unauthorized access and service disruption.
                   </p>
                   
@@ -431,7 +431,7 @@ export default function HelpPage() {
                   
                   <h4 className="font-medium">Limitation of Liability</h4>
                   <p className="text-muted-foreground">
-                    NTQ Solution's liability is limited to the amount paid for services in the preceding 
+                    NTQ Solution&apos;s liability is limited to the amount paid for services in the preceding 
                     12 months, except where prohibited by law.
                   </p>
                 </div>

@@ -1,6 +1,15 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+
+interface PerformanceDataPoint {
+  time: string;
+  renderTime: number;
+  memoryUsage: number;
+  fps: number;
+  [key: string]: string | number;
+}
+
 import { 
   usePerformanceMonitor, 
   useMemoryMonitor, 
@@ -22,7 +31,7 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { 
   Activity, 
-  Memory, 
+  MemoryStick, 
   Zap, 
   AlertTriangle, 
   CheckCircle, 
@@ -78,7 +87,7 @@ function HeavyComponent() {
 
 export default function PerformanceDashboard() {
   const [showError, setShowError] = useState(false);
-  const [performanceData, setPerformanceData] = useState<any[]>([]);
+  const [performanceData, setPerformanceData] = useState<PerformanceDataPoint[]>([]);
   const memoryInfo = useMemoryMonitor();
   const { getMetrics } = usePerformanceMonitor('PerformanceDashboard');
   
@@ -170,7 +179,7 @@ export default function PerformanceDashboard() {
               unit="MB"
               trend="neutral"
               status="info"
-              icon={Memory}
+              icon={MemoryStick}
             />
             
             <MetricWidget
@@ -380,7 +389,7 @@ export default function PerformanceDashboard() {
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <Memory className="h-5 w-5 text-green-500 mt-0.5" />
+                  <MemoryStick className="h-5 w-5 text-green-500 mt-0.5" />
                   <div>
                     <h4 className="font-medium">Memory Management</h4>
                     <p className="text-sm text-muted-foreground">

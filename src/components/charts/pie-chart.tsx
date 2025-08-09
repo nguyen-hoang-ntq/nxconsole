@@ -5,7 +5,7 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recha
 import { ChartContainer } from './chart-container';
 
 interface PieChartComponentProps {
-  data: any[];
+  data: Array<Record<string, string | number>>;
   dataKey: string;
   nameKey: string;
   colors: string[];
@@ -17,9 +17,9 @@ interface PieChartComponentProps {
   showLabels?: boolean;
   innerRadius?: number;
   outerRadius?: number | string;
-  formatTooltip?: (value: any, name: string) => [string, string];
-  formatLabel?: (entry: any) => string;
-  onSegmentClick?: (data: any) => void;
+  formatTooltip?: (value: string | number, name: string) => [string, string];
+  formatLabel?: (entry: Record<string, string | number>) => string;
+  onSegmentClick?: (data: Record<string, string | number>) => void;
 }
 
 export function PieChartComponent({
@@ -39,7 +39,7 @@ export function PieChartComponent({
   formatLabel,
   onSegmentClick
 }: PieChartComponentProps) {
-  const CustomTooltip = ({ active, payload }: any) => {
+  const CustomTooltip = ({ active, payload }: { active?: boolean; payload?: Array<{ name: string; value: number; color: string; payload?: { total: number } }> }) => {
     if (active && payload && payload.length) {
       const data = payload[0];
       return (
@@ -52,7 +52,7 @@ export function PieChartComponent({
             }
           </p>
           <p className="text-xs text-muted-foreground">
-            {((data.value / data.payload.total) * 100).toFixed(1)}%
+            {data.payload ? ((data.value / data.payload.total) * 100).toFixed(1) : '0'}%
           </p>
         </div>
       );
@@ -60,13 +60,13 @@ export function PieChartComponent({
     return null;
   };
 
-  const CustomLabel = (entry: any) => {
+  const CustomLabel = (entry: { value: number; payload?: { total: number }; name: string; percent: number }) => {
     if (!showLabels) return null;
     
-    const percent = ((entry.value / entry.payload.total) * 100).toFixed(1);
+    const percent = entry.payload ? ((entry.value / entry.payload.total) * 100).toFixed(1) : '0';
     
     if (formatLabel) {
-      return formatLabel(entry);
+      return formatLabel({ name: entry.name, value: entry.value, percent: entry.percent });
     }
     
     return `${percent}%`;
@@ -75,7 +75,7 @@ export function PieChartComponent({
   // Calculate total for percentage calculations
   const dataWithTotal = data.map(item => ({
     ...item,
-    total: data.reduce((sum, d) => sum + d[dataKey], 0)
+    total: data.reduce((sum, d) => sum + (typeof d[dataKey] === 'number' ? d[dataKey] : 0), 0)
   }));
 
   const content = (
@@ -86,7 +86,7 @@ export function PieChartComponent({
           cx="50%"
           cy="50%"
           labelLine={false}
-          label={showLabels ? CustomLabel : false}
+          label={showLabels}
           outerRadius={outerRadius}
           innerRadius={innerRadius}
           fill="#8884d8"

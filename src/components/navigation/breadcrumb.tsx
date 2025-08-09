@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils';
 interface BreadcrumbItem {
   label: string;
   href: string;
-  icon?: React.ComponentType<any>;
+  icon?: React.ComponentType<{ className?: string }>;
 }
 
 const routeMap: Record<string, string> = {

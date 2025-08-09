@@ -1,6 +1,41 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+
+interface DashboardMetrics {
+  totalResources: number;
+  activeAlerts: number;
+  totalUsers: number;
+  complianceScore: number;
+  lastUpdated: Date;
+}
+
+interface CostHistoryItem {
+  period: string;
+  total: number;
+  aws: number;
+  azure: number;
+  m365: number;
+}
+
+interface PerformanceDataPoint {
+  time: string;
+  cpu: number;
+  memory: number;
+  network: number;
+}
+
+interface UptimeDataPoint {
+  service: string;
+  uptime: number;
+}
+
+interface ForecastDataPoint {
+  month: string;
+  predicted: number | null;
+  actual: number | null;
+}
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -41,7 +76,6 @@ import {
 } from 'lucide-react';
 import { 
   ResponsiveContainer, 
-  LineChart, 
   Line, 
   XAxis, 
   YAxis, 
@@ -58,11 +92,10 @@ import Link from 'next/link';
 
 export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
-  const [metrics, setMetrics] = useState<any>(null);
-  const [costHistory, setCostHistory] = useState<any[]>([]);
-  const [performanceData, setPerformanceData] = useState<any[]>([]);
-  const [uptimeData, setUptimeData] = useState<any[]>([]);
-  const [forecastData, setForecastData] = useState<any[]>([]);
+  const [metrics, setMetrics] = useState<DashboardMetrics | null>(null);
+  const [performanceData, setPerformanceData] = useState<PerformanceDataPoint[]>([]);
+  const [uptimeData, setUptimeData] = useState<UptimeDataPoint[]>([]);
+  const [forecastData, setForecastData] = useState<ForecastDataPoint[]>([]);
   const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
   const [dashboardConfig, setDashboardConfig] = useState({
     showMetrics: true,
@@ -97,7 +130,6 @@ export default function DashboardPage() {
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       setMetrics(generateMockMetrics());
-      setCostHistory(generateMockCostHistory(6));
       
       // Generate performance data
       setPerformanceData([
@@ -141,7 +173,6 @@ export default function DashboardPage() {
     toastInfo('Refreshing dashboard data...');
     await new Promise(resolve => setTimeout(resolve, 500));
     setMetrics(generateMockMetrics());
-    setCostHistory(generateMockCostHistory(6));
     
     // Refresh performance data with slight variations
     setPerformanceData([
@@ -193,7 +224,7 @@ export default function DashboardPage() {
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
           <p className="text-muted-foreground">
-            Welcome back! Here's what's happening with your cloud infrastructure.
+            Welcome back! Here&apos;s what&apos;s happening with your cloud infrastructure.
           </p>
         </div>
         <div className="flex items-center gap-3">
@@ -388,7 +419,7 @@ export default function DashboardPage() {
             type: 'increase',
             period: 'last month'
           }}
-          trend={mockData.costData.previousPeriod?.changePercent! > 0 ? 'down' : 'up'}
+          trend={(mockData.costData.previousPeriod?.changePercent ?? 0) > 0 ? 'down' : 'up'}
           icon={DollarSign}
           loading={loading}
         />

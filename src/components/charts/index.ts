@@ -7,18 +7,23 @@ export { PieChartComponent } from './pie-chart';
 export { AreaChartComponent } from './area-chart';
 export { HeatmapComponent } from './heatmap';
 export { GaugeChartComponent } from './gauge-chart';
-export { TimelineComponent } from './timeline';
+export { TimelineComponent, type TimelineEvent } from './timeline';
 export { MetricWidget, ProgressWidget, StatusWidget, DashboardWidgets } from './dashboard-widgets';
 
 // Chart utility types
 export interface ChartDataPoint {
-  [key: string]: any;
+  [key: string]: string | number | boolean | null | undefined;
 }
 
 export interface ChartTooltipProps {
   active?: boolean;
-  payload?: any[];
-  label?: any;
+  payload?: Array<{
+    dataKey: string;
+    value: string | number;
+    color: string;
+    name?: string;
+  }>;
+  label?: string | number;
 }
 
 export interface ChartLegendProps {

@@ -5,7 +5,7 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 import { ChartContainer } from './chart-container';
 
 interface AreaChartComponentProps {
-  data: any[];
+  data: Array<Record<string, string | number>>;
   xDataKey: string;
   areas: {
     dataKey: string;
@@ -20,9 +20,9 @@ interface AreaChartComponentProps {
   showLegend?: boolean;
   showTooltip?: boolean;
   showExport?: boolean;
-  formatTooltip?: (value: any, name: string) => [string, string];
-  formatXAxis?: (value: any) => string;
-  formatYAxis?: (value: any) => string;
+  formatTooltip?: (value: string | number, name: string) => [string, string];
+  formatXAxis?: (value: string | number) => string;
+  formatYAxis?: (value: string | number) => string;
   fillOpacity?: number;
 }
 
@@ -41,16 +41,20 @@ export function AreaChartComponent({
   formatYAxis,
   fillOpacity = 0.6
 }: AreaChartComponentProps) {
-  const CustomTooltip = ({ active, payload, label }: any) => {
+  const CustomTooltip = ({ active, payload, label }: {
+    active?: boolean;
+    payload?: Array<{ dataKey: string; value: string | number; color: string; name?: string }>;
+    label?: string | number;
+  }) => {
     if (active && payload && payload.length) {
       return (
         <div className="bg-background border border-border rounded-lg shadow-lg p-3">
-          <p className="font-medium text-sm">{formatXAxis ? formatXAxis(label) : label}</p>
-          {payload.map((entry: any, index: number) => (
+          <p className="font-medium text-sm">{formatXAxis ? formatXAxis(label!) : label}</p>
+          {payload.map((entry, index: number) => (
             <p key={index} className="text-sm" style={{ color: entry.color }}>
               {formatTooltip 
-                ? formatTooltip(entry.value, entry.name)[1] + ': ' + formatTooltip(entry.value, entry.name)[0]
-                : `${entry.name}: ${entry.value}`
+                ? formatTooltip(entry.value, entry.name || '')[1] + ': ' + formatTooltip(entry.value, entry.name || '')[0]
+                : `${entry.name || 'Value'}: ${entry.value}`
               }
             </p>
           ))}

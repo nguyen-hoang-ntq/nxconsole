@@ -16,9 +16,9 @@ export default function TermsOfServicePage() {
         <section>
           <h2 className="text-2xl font-semibold mb-4">Agreement to Terms</h2>
           <p>
-            These Terms of Service ("Terms") constitute a legally binding agreement between you ("Customer," "you," or "your") 
-            and NTQ Solution JSC ("NTQ Solution," "Company," "we," "us," or "our") regarding your use of NxConsole, 
-            our cloud management platform and related services ("Services").
+            These Terms of Service (&quot;Terms&quot;) constitute a legally binding agreement between you (&quot;Customer,&quot; &quot;you,&quot; or &quot;your&quot;) 
+            and NTQ Solution JSC (&quot;NTQ Solution,&quot; &quot;Company,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) regarding your use of NxConsole, 
+            our cloud management platform and related services (&quot;Services&quot;).
           </p>
           <p className="mt-4">
             By accessing or using our Services, you agree to be bound by these Terms. If you do not agree to these Terms, 
@@ -87,7 +87,7 @@ export default function TermsOfServicePage() {
           <h3 className="text-lg font-medium mb-2 mt-4">Account Responsibilities</h3>
           <ul className="list-disc list-inside mt-2 space-y-1">
             <li>You are responsible for all activities that occur under your account</li>
-            <li>You must comply with your organization's internal policies</li>
+            <li>You must comply with your organization&apos;s internal policies</li>
             <li>You must ensure authorized use by team members and colleagues</li>
           </ul>
         </section>
@@ -129,7 +129,7 @@ export default function TermsOfServicePage() {
           </p>
           <ul className="list-disc list-inside mt-2 space-y-1">
             <li>Maintaining appropriate permissions and access controls</li>
-            <li>Ensuring compliance with your cloud providers' terms</li>
+            <li>Ensuring compliance with your cloud providers&apos; terms</li>
             <li>Managing data retention and deletion policies</li>
             <li>Monitoring for unauthorized access or changes</li>
           </ul>
@@ -193,7 +193,7 @@ export default function TermsOfServicePage() {
         <section>
           <h2 className="text-2xl font-semibold mb-4">Limitation of Liability</h2>
           <p>
-            To the maximum extent permitted by law, NTQ Solution's total liability for any claims related to the Services 
+            To the maximum extent permitted by law, NTQ Solution&apos;s total liability for any claims related to the Services 
             shall not exceed the amounts paid by you in the twelve months preceding the claim.
           </p>
           <p className="mt-4">
@@ -253,14 +253,14 @@ export default function TermsOfServicePage() {
         </section>
 
         <section className="bg-muted p-6 rounded-lg">
-          <h2 className="text-xl font-semibold mb-4">NTQ Solution's Commitment</h2>
+          <h2 className="text-xl font-semibold mb-4">NTQ Solution&apos;s Commitment</h2>
           <p className="text-sm">
-            "Our goal is to deliver world-class products and services that exceed our clients' expectations in every way possible. 
-            We take pride in providing innovative solutions that help our clients achieve their goals." 
+            &quot;Our goal is to deliver world-class products and services that exceed our clients&apos; expectations in every way possible. 
+            We take pride in providing innovative solutions that help our clients achieve their goals.&quot; 
             - Pham Thai Son, CEO, NTQ Solution
           </p>
           <p className="text-sm mt-2">
-            With our proven track record across 30 industries and commitment to quality excellence, we're dedicated to 
+            With our proven track record across 30 industries and commitment to quality excellence, we&apos;re dedicated to 
             providing you with reliable, secure, and innovative cloud management solutions.
           </p>
         </section>

@@ -57,12 +57,16 @@ export function usePerformanceMonitor(componentName: string, threshold = 16) {
 
 // Memory usage monitoring
 export function useMemoryMonitor() {
-  const [memoryInfo, setMemoryInfo] = useState<any>(null);
+  const [memoryInfo, setMemoryInfo] = useState<{
+    usedJSHeapSize: number;
+    totalJSHeapSize: number;
+    jsHeapSizeLimit: number;
+  } | null>(null);
 
   useEffect(() => {
     const updateMemoryInfo = () => {
       if ('memory' in performance) {
-        setMemoryInfo((performance as any).memory);
+        setMemoryInfo((performance as { memory: { usedJSHeapSize: number; totalJSHeapSize: number; jsHeapSizeLimit: number } }).memory);
       }
     };
 
@@ -76,7 +80,7 @@ export function useMemoryMonitor() {
 }
 
 // Debounced function hook
-export function useDebounce<T extends (...args: any[]) => any>(
+export function useDebounce<T extends (...args: Array<string | number | boolean>) => void>(
   callback: T,
   delay: number
 ): T {
@@ -102,7 +106,7 @@ export function useDebounce<T extends (...args: any[]) => any>(
 }
 
 // Throttled function hook
-export function useThrottle<T extends (...args: any[]) => any>(
+export function useThrottle<T extends (...args: Array<string | number | boolean>) => void>(
   callback: T,
   delay: number
 ): T {
@@ -280,7 +284,7 @@ export function usePerformanceBudget(budget: PerformanceBudget) {
     
     // Check memory usage
     if ('memory' in performance) {
-      const memory = (performance as any).memory;
+      const memory = (performance as { memory: { usedJSHeapSize: number } }).memory;
       if (memory.usedJSHeapSize > budget.maxMemoryUsage) {
         newViolations.push(`Memory usage exceeded: ${(memory.usedJSHeapSize / 1024 / 1024).toFixed(2)}MB > ${(budget.maxMemoryUsage / 1024 / 1024).toFixed(2)}MB`);
       }
