@@ -11,7 +11,9 @@ import {
   Sparkles,
   BarChart3,
   Zap,
-  RefreshCw
+  RefreshCw,
+  Shield,
+  Search
 } from 'lucide-react';
 import { ChatBot } from '@/components/ai/chat-bot';
 import { InsightsPanel } from '@/components/ai/insights-panel';
@@ -158,19 +160,24 @@ export default function AIInsightsPage() {
                   </CardHeader>
                   <CardContent className="space-y-2">
                     <Button variant="ghost" className="w-full justify-start text-sm h-8">
-                      💰 Cost optimization strategies
+                      <BarChart3 className="w-4 h-4 mr-2 text-green-600" />
+                      Cost optimization strategies
                     </Button>
                     <Button variant="ghost" className="w-full justify-start text-sm h-8">
-                      🔒 Security best practices
+                      <Shield className="w-4 h-4 mr-2 text-yellow-600" />
+                      Security best practices
                     </Button>
                     <Button variant="ghost" className="w-full justify-start text-sm h-8">
-                      📊 Performance monitoring
+                      <BarChart3 className="w-4 h-4 mr-2 text-blue-600" />
+                      Performance monitoring
                     </Button>
                     <Button variant="ghost" className="w-full justify-start text-sm h-8">
-                      ⚡ Auto-scaling tips
+                      <Zap className="w-4 h-4 mr-2 text-orange-500" />
+                      Auto-scaling tips
                     </Button>
                     <Button variant="ghost" className="w-full justify-start text-sm h-8">
-                      🔮 Capacity planning
+                      <Search className="w-4 h-4 mr-2 text-purple-600" />
+                      Capacity planning
                     </Button>
                   </CardContent>
                 </Card>

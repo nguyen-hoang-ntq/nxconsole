@@ -3,6 +3,7 @@
 import React from 'react';
 import { ResponsiveContainer } from 'recharts';
 import { ChartContainer } from './chart-container';
+import { useTheme } from '@/hooks/use-theme';
 
 interface GaugeChartComponentProps {
   value: number;
@@ -39,12 +40,19 @@ export function GaugeChartComponent({
   showExport = false,
   size = 'md',
   color = '#3b82f6',
-  backgroundColor = '#e5e7eb',
+  backgroundColor,
   strokeWidth = 8,
   animationDuration = 1000,
   thresholds,
   formatValue
 }: GaugeChartComponentProps) {
+  const { isDarkMode } = useTheme();
+  
+  // Use CSS variables for dark mode compatible background color
+  const defaultBackgroundColor = isDarkMode 
+    ? 'hsl(var(--muted))' 
+    : backgroundColor || '#e5e7eb';
+  
   // Calculate percentage
   const percentage = Math.min(Math.max(((value - min) / (max - min)) * 100, 0), 100);
   
@@ -89,7 +97,7 @@ export function GaugeChartComponent({
               cy={radius}
               r={centerRadius}
               fill="none"
-              stroke={backgroundColor}
+              stroke={defaultBackgroundColor}
               strokeWidth={strokeWidth}
               className="opacity-20"
             />

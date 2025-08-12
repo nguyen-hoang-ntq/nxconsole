@@ -4,6 +4,7 @@ import React from 'react';
 import { ChartContainer } from './chart-container';
 import { Badge } from '@/components/ui/badge';
 import { Calendar, Clock, User, AlertCircle, CheckCircle, XCircle } from 'lucide-react';
+import { useTheme } from '@/hooks/use-theme';
 
 export interface TimelineEvent {
   id: string;

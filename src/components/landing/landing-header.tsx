@@ -28,14 +28,20 @@ export function LandingHeader() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-              Features
+            <a href="#pillars" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+              Four Pillars
+            </a>
+            <a href="#cloud-integration" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+              Multi-Cloud
             </a>
             <a href="#benefits" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
               Benefits
             </a>
-            <a href="#pricing" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-              Pricing
+            <a href="#capabilities" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+              Enterprise
+            </a>
+            <a href="#testimonials" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+              Customers
             </a>
             <a href="#about" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
               About
@@ -67,14 +73,20 @@ export function LandingHeader() {
         {isMenuOpen && (
           <div className="md:hidden border-t py-4">
             <nav className="flex flex-col space-y-4">
-              <a href="#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-                Features
+              <a href="#pillars" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                Four Pillars
+              </a>
+              <a href="#cloud-integration" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                Multi-Cloud
               </a>
               <a href="#benefits" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
                 Benefits
               </a>
-              <a href="#pricing" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-                Pricing
+              <a href="#capabilities" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                Enterprise
+              </a>
+              <a href="#testimonials" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                Customers
               </a>
               <a href="#about" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
                 About

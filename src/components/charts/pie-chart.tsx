@@ -3,6 +3,8 @@
 import React from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 import { ChartContainer } from './chart-container';
+import { getChartConfig } from '@/lib/chart-colors';
+import { useTheme } from '@/hooks/use-theme';
 
 interface PieChartComponentProps {
   data: Array<Record<string, string | number>>;
@@ -39,11 +41,14 @@ export function PieChartComponent({
   formatLabel,
   onSegmentClick
 }: PieChartComponentProps) {
+  const { isDarkMode } = useTheme();
+  const chartConfig = getChartConfig(isDarkMode);
+
   const CustomTooltip = ({ active, payload }: { active?: boolean; payload?: Array<{ name: string; value: number; color: string; payload?: { total: number } }> }) => {
     if (active && payload && payload.length) {
       const data = payload[0];
       return (
-        <div className="bg-background border border-border rounded-lg shadow-lg p-3">
+        <div style={chartConfig.tooltip.contentStyle}>
           <p className="font-medium text-sm">{data.name}</p>
           <p className="text-sm" style={{ color: data.color }}>
             {formatTooltip 

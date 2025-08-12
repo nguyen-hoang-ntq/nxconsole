@@ -1,13 +1,24 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 interface PerformanceDataPoint {
   time: string;
   renderTime: number;
   memoryUsage: number;
   fps: number;
+  cpuUsage: number;
+  networkLatency: number;
   [key: string]: string | number;
+}
+
+interface RealTimeMetrics {
+  timestamp: string;
+  cpu: number;
+  memory: number;
+  network: number;
+  responseTime: number;
 }
 
 import { 
@@ -37,7 +48,10 @@ import {
   CheckCircle, 
   TrendingUp,
   Bug,
-  RefreshCw
+  RefreshCw,
+  MonitorSpeaker,
+  Cpu,
+  WifiIcon
 } from 'lucide-react';
 
 // Component that intentionally throws an error for testing
@@ -46,6 +60,40 @@ function ErrorTestComponent({ shouldError }: { shouldError: boolean }) {
     throw new Error('Test error for Error Boundary demonstration');
   }
   return <div className="p-4 bg-green-50 rounded">Component working normally</div>;
+}
+
+// Real-time metrics hook
+function useRealTimeMetrics() {
+  const [metrics, setMetrics] = useState<RealTimeMetrics[]>([]);
+  const [isCollecting, setIsCollecting] = useState(false);
+
+  useEffect(() => {
+    if (!isCollecting) return;
+
+    const interval = setInterval(() => {
+      const now = new Date();
+      const timestamp = now.toLocaleTimeString();
+      
+      // Simulate real-time metrics
+      const newMetric: RealTimeMetrics = {
+        timestamp,
+        cpu: Math.random() * 100,
+        memory: 40 + Math.random() * 40,
+        network: 10 + Math.random() * 50,
+        responseTime: 50 + Math.random() * 200
+      };
+
+      setMetrics(prev => {
+        const updated = [...prev, newMetric];
+        // Keep only last 20 data points
+        return updated.slice(-20);
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [isCollecting]);
+
+  return { metrics, isCollecting, setIsCollecting };
 }
 
 // Heavy component for performance testing
@@ -102,11 +150,13 @@ export default function PerformanceDashboard() {
   useEffect(() => {
     const interval = setInterval(() => {
       const now = new Date();
-      const newDataPoint = {
+      const newDataPoint: PerformanceDataPoint = {
         time: now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }),
         renderTime: Math.random() * 20 + 5,
         memoryUsage: memoryInfo ? memoryInfo.usedJSHeapSize / 1024 / 1024 : 0,
-        fps: 60 - Math.random() * 10
+        fps: 60 - Math.random() * 10,
+        cpuUsage: Math.random() * 100,
+        networkLatency: 10 + Math.random() * 50
       };
 
       setPerformanceData(prev => {
@@ -143,6 +193,8 @@ export default function PerformanceDashboard() {
     }
   ];
 
+  const { metrics: realTimeMetrics, isCollecting, setIsCollecting } = useRealTimeMetrics();
+
   return (
     <div className="p-6 space-y-8 max-w-7xl mx-auto">
       <div className="mb-8">
@@ -155,6 +207,7 @@ export default function PerformanceDashboard() {
       <Tabs defaultValue="performance" className="space-y-6">
         <TabsList>
           <TabsTrigger value="performance">Performance</TabsTrigger>
+          <TabsTrigger value="realtime">Real-time Monitoring</TabsTrigger>
           <TabsTrigger value="errors">Error Handling</TabsTrigger>
           <TabsTrigger value="optimization">Optimization</TabsTrigger>
         </TabsList>
@@ -270,6 +323,185 @@ export default function PerformanceDashboard() {
           <ErrorBoundary level="component">
             <HeavyComponent />
           </ErrorBoundary>
+        </TabsContent>
+
+        <TabsContent value="realtime" className="space-y-6">
+          {/* Real-time Controls */}
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-lg font-semibold">Real-time Performance Monitoring</h3>
+              <p className="text-sm text-muted-foreground">Live metrics updated every second</p>
+            </div>
+            <Button
+              onClick={() => setIsCollecting(!isCollecting)}
+              variant={isCollecting ? "destructive" : "default"}
+              className="flex items-center gap-2"
+            >
+              <Activity className="h-4 w-4" />
+              {isCollecting ? 'Stop Monitoring' : 'Start Monitoring'}
+            </Button>
+          </div>
+
+          {/* Real-time Metrics Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <MetricWidget
+              title="CPU Usage"
+              value={realTimeMetrics.length > 0 ? realTimeMetrics[realTimeMetrics.length - 1].cpu.toFixed(1) : '0'}
+              unit="%"
+              trend="neutral"
+              status="info"
+              icon={Cpu}
+            />
+            
+            <MetricWidget
+              title="Memory Usage"
+              value={realTimeMetrics.length > 0 ? realTimeMetrics[realTimeMetrics.length - 1].memory.toFixed(1) : '0'}
+              unit="MB"
+              trend="neutral"
+              status="info"
+              icon={MemoryStick}
+            />
+            
+            <MetricWidget
+              title="Network Latency"
+              value={realTimeMetrics.length > 0 ? realTimeMetrics[realTimeMetrics.length - 1].network.toFixed(0) : '0'}
+              unit="ms"
+              trend="neutral"
+              status="info"
+              icon={WifiIcon}
+            />
+            
+            <MetricWidget
+              title="Response Time"
+              value={realTimeMetrics.length > 0 ? realTimeMetrics[realTimeMetrics.length - 1].responseTime.toFixed(0) : '0'}
+              unit="ms"
+              trend="neutral"
+              status="info"
+              icon={MonitorSpeaker}
+            />
+          </div>
+
+          {/* Real-time Charts */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Activity className="h-5 w-5" />
+                  System Metrics
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ResponsiveContainer width="100%" height={300}>
+                  <LineChart data={realTimeMetrics}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                    <XAxis 
+                      dataKey="timestamp" 
+                      tick={{ fill: 'hsl(var(--foreground))' }}
+                    />
+                    <YAxis tick={{ fill: 'hsl(var(--foreground))' }} />
+                    <Tooltip 
+                      contentStyle={{
+                        backgroundColor: 'white',
+                        border: '1px solid hsl(var(--border))',
+                        borderRadius: '8px',
+                        boxShadow: '0 4px 12px rgb(0 0 0 / 0.15)',
+                      }}
+                    />
+                    <Line 
+                      type="monotone" 
+                      dataKey="cpu" 
+                      stroke="#ef4444" 
+                      strokeWidth={2}
+                      name="CPU (%)"
+                      dot={false}
+                    />
+                    <Line 
+                      type="monotone" 
+                      dataKey="memory" 
+                      stroke="#10b981" 
+                      strokeWidth={2}
+                      name="Memory (MB)"
+                      dot={false}
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <WifiIcon className="h-5 w-5" />
+                  Network Performance
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ResponsiveContainer width="100%" height={300}>
+                  <AreaChart data={realTimeMetrics}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                    <XAxis 
+                      dataKey="timestamp" 
+                      tick={{ fill: 'hsl(var(--foreground))' }}
+                    />
+                    <YAxis tick={{ fill: 'hsl(var(--foreground))' }} />
+                    <Tooltip 
+                      contentStyle={{
+                        backgroundColor: 'white',
+                        border: '1px solid hsl(var(--border))',
+                        borderRadius: '8px',
+                        boxShadow: '0 4px 12px rgb(0 0 0 / 0.15)',
+                      }}
+                    />
+                    <Area 
+                      type="monotone" 
+                      dataKey="network" 
+                      stroke="#3b82f6" 
+                      fill="#3b82f6" 
+                      fillOpacity={0.3}
+                      name="Network Latency (ms)"
+                    />
+                    <Area 
+                      type="monotone" 
+                      dataKey="responseTime" 
+                      stroke="#f59e0b" 
+                      fill="#f59e0b" 
+                      fillOpacity={0.3}
+                      name="Response Time (ms)"
+                    />
+                  </AreaChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Real-time Status */}
+          {realTimeMetrics.length > 0 && (
+            <Card>
+              <CardHeader>
+                <CardTitle>Real-time Status</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium">Data Points Collected</span>
+                    <Badge variant="secondary">{realTimeMetrics.length}</Badge>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium">Monitoring Status</span>
+                    <Badge variant={isCollecting ? "default" : "secondary"}>
+                      {isCollecting ? "Active" : "Stopped"}
+                    </Badge>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium">Last Update</span>
+                    <span className="text-sm text-muted-foreground">
+                      {realTimeMetrics[realTimeMetrics.length - 1].timestamp}
+                    </span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          )}
         </TabsContent>
 
         <TabsContent value="errors" className="space-y-6">

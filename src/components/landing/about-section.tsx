@@ -44,22 +44,22 @@ const achievements = [
 const coreValues = [
   {
     title: "Innovation-First",
-    description: "We&apos;re constantly pushing the boundaries of what&apos;s possible in cloud cost management.",
+    description: "We&apos;re constantly pushing the boundaries of unified cloud operations and intelligent automation.",
     icon: <TrendingUp className="h-6 w-6 text-blue-600" />
   },
   {
-    title: "Customer-Centric",
-    description: "Your success is our priority. We build solutions that directly address your challenges.",
+    title: "Enterprise-Focused",
+    description: "Purpose-built for large-scale cloud operations with enterprise-grade reliability and support.",
     icon: <Users className="h-6 w-6 text-green-600" />
   },
   {
-    title: "Enterprise Security",
-    description: "Bank-level security standards with compliance across SOC 2, GDPR, and industry regulations.",
+    title: "Security-First",
+    description: "Bank-level security standards with comprehensive compliance across all 4 operational pillars.",
     icon: <Shield className="h-6 w-6 text-purple-600" />
   },
   {
     title: "Global Excellence",
-    description: "Serving clients across 6 continents with 24/7 support and local expertise.",
+    description: "Serving enterprise clients across 6 continents with 24/7 operational support and expertise.",
     icon: <Globe className="h-6 w-6 text-orange-600" />
   }
 ];
@@ -70,11 +70,12 @@ export function AboutSection() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-            Powered by NTQ Solution&apos;s Expertise
+            Powered by NTQ Solution&apos;s Enterprise Cloud Expertise
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            NxConsole is built on 14+ years of enterprise cloud expertise from NTQ Solution, 
-            a global technology leader trusted by 350+ clients across 30 industries worldwide.
+            NxConsole is built on 14+ years of enterprise cloud operations expertise from NTQ Solution, 
+            a global technology leader trusted by 350+ clients to manage complex multi-cloud environments 
+            across all operational domains.
           </p>
         </div>
 
@@ -97,25 +98,25 @@ export function AboutSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
           <div className="space-y-6">
             <h3 className="text-2xl font-bold">
-              From Enterprise Consulting to Cloud Innovation
+              From Enterprise Consulting to Unified Cloud Operations
             </h3>
             <div className="space-y-4 text-muted-foreground">
               <p>
                 Founded in 2011, NTQ Solution began as a technology consulting firm focused on 
                 helping enterprises navigate digital transformation. Over the years, we&apos;ve evolved 
                 into a comprehensive technology partner, specializing in cloud architecture, 
-                digital solutions, and cost optimization.
+                multi-cloud operations, and enterprise automation.
               </p>
               <p>
                 As cloud adoption accelerated, we recognized a critical gap: organizations were 
-                struggling with multi-cloud cost management and visibility. Traditional tools 
-                were fragmented, complex, and failed to provide the unified insights that 
-                modern enterprises needed.
+                struggling with fragmented cloud operations across cost management, resource optimization, 
+                performance monitoring, and security compliance. Traditional tools were siloed, 
+                complex, and failed to provide the unified insights that modern enterprises needed.
               </p>
               <p>
-                Today, we&apos;re proud to help organizations worldwide optimize their cloud spending, 
-                improve operational efficiency, and make data-driven decisions about their 
-                cloud infrastructure investments.
+                Today, we&apos;re proud to help organizations worldwide unify their multi-cloud operations, 
+                optimize performance across all domains, and make data-driven decisions about their 
+                complete cloud infrastructure through our comprehensive 4-pillar platform approach.
               </p>
             </div>
             
@@ -137,9 +138,9 @@ export function AboutSection() {
                   Our Mission
                 </CardTitle>
                 <CardDescription className="text-base">
-                  We&apos;re dedicated to delivering world-class cloud cost management solutions 
-                  that empower organizations to optimize their multi-cloud investments, 
-                  reduce waste, and accelerate innovation.
+                  We&apos;re dedicated to delivering world-class unified cloud operations solutions 
+                  that empower organizations to optimize their multi-cloud environments across all 
+                  operational domains, reduce complexity, and accelerate innovation.
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -151,9 +152,9 @@ export function AboutSection() {
                   Our Vision
                 </CardTitle>
                 <CardDescription className="text-base">
-                  To become the global standard for intelligent cloud cost management, 
+                  To become the global standard for intelligent unified cloud operations, 
                   enabling enterprises to achieve maximum value from their cloud investments 
-                  while maintaining operational excellence.
+                  through comprehensive 4-pillar management and operational excellence.
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -197,10 +198,10 @@ export function AboutSection() {
         {/* Contact CTA */}
         <Card className="bg-gradient-to-r from-primary/5 to-blue-500/5 border-primary/20">
           <CardContent className="p-8 text-center">
-            <h3 className="text-2xl font-bold mb-4">Ready to Transform Your Cloud Costs?</h3>
+            <h3 className="text-2xl font-bold mb-4">Ready to Transform Your Cloud Operations?</h3>
             <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
               Join hundreds of organizations that trust NTQ Solution&apos;s expertise. 
-              Let&apos;s discuss how NxConsole can optimize your multi-cloud environment.
+              Let&apos;s discuss how NxConsole can optimize your multi-cloud environment across all operational domains.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" asChild>

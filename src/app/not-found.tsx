@@ -56,17 +56,17 @@ export default function NotFound() {
                 </Button>
               </Link>
               
-              <Link href="/dashboard/user-management" className="block">
+              <Link href="/dashboard/users" className="block">
                 <Button variant="outline" className="w-full h-16 flex-col">
                   <BookOpen className="h-6 w-6 mb-2" />
                   User Management
                 </Button>
               </Link>
               
-              <Link href="/dashboard/finops" className="block">
+              <Link href="/dashboard/cost-management" className="block">
                 <Button variant="outline" className="w-full h-16 flex-col">
                   <BookOpen className="h-6 w-6 mb-2" />
-                  FinOps & Billing
+                  Cost Management
                 </Button>
               </Link>
             </div>

@@ -49,13 +49,15 @@ const navigationItems: NavigationItem[] = [
     ]
   },
   {
-    title: 'FinOps',
-    href: '/finops',
+    title: 'Cost Management',
+    href: '/dashboard/cost-management',
     icon: DollarSign,
     children: [
-      { title: 'Cost Management', href: '/finops/costs', icon: DollarSign },
-      { title: 'Budgets', href: '/finops/budgets', icon: DollarSign },
-      { title: 'Optimization', href: '/finops/optimization', icon: DollarSign }
+      { title: 'Overview', href: '/dashboard/cost-management', icon: DollarSign },
+      { title: 'AWS', href: '/dashboard/cost-management/aws', icon: DollarSign },
+      { title: 'Azure', href: '/dashboard/cost-management/azure', icon: DollarSign },
+      { title: 'GCP', href: '/dashboard/cost-management/gcp', icon: DollarSign },
+      { title: 'M365', href: '/dashboard/cost-management/m365', icon: DollarSign }
     ]
   },
   {

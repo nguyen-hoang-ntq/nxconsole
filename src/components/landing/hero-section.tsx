@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Play, TrendingDown, Eye, AlertCircle } from 'lucide-react';
+import { ArrowRight, Play, DollarSign, Server, Activity, Shield, Eye, AlertCircle, TrendingDown } from 'lucide-react';
 import { CloudIcon } from '@/components/icons/cloud-icons';
 
 export function HeroSection() {
@@ -14,35 +14,36 @@ export function HeroSection() {
         <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-8">
-            <span>Optimize Cloud Costs with Intelligence & Efficiency</span>
+            <span>Unified Multi-Cloud Operations • 4-Pillar Architecture</span>
           </div>
 
           {/* Headline */}
           <h1 className="text-4xl lg:text-6xl font-bold tracking-tight mb-6">
-            Unified Multi-Cloud
+            Comprehensive
             <br />
-            <span className="text-primary">Cost Management</span>
+            <span className="text-primary">Multi-Cloud Management</span>
             <br />
             Platform
           </h1>
 
           {/* Subheadline */}
           <p className="text-lg lg:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-            Control costs, optimize spending, and manage AWS, Azure, Google Cloud & Microsoft 365 
-            from one powerful dashboard. Reduce cloud costs by up to 40% with intelligent automation.
+            Unify your cloud operations across Cost Management, Resource Management, 
+            Performance Monitoring, and Security & Compliance. Complete control over 
+            AWS, Azure, Google Cloud & Microsoft 365 from one intelligent platform.
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <Button size="lg" asChild className="text-lg px-8 py-6">
               <Link href="/login">
-                Start Exploring
+                Explore Platform
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
             <Button size="lg" variant="outline" className="text-lg px-8 py-6">
               <Play className="mr-2 h-5 w-5" />
-              Watch Demo
+              Request Demo
             </Button>
           </div>
 
@@ -58,7 +59,7 @@ export function HeroSection() {
                         <span className="text-white font-bold text-sm">Nx</span>
                       </div>
                       <h3 className="text-xl font-bold text-primary">
-                        Multi-Cloud Cost Dashboard
+                        Unified Multi-Cloud Operations Dashboard
                       </h3>
                     </div>
                     <div className="flex items-center gap-2 text-xs text-muted-foreground">
@@ -67,57 +68,58 @@ export function HeroSection() {
                     </div>
                   </div>
 
-                  {/* Platform Cost Cards */}
+                  {/* 4-Pillar Overview Cards */}
                   <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                    <div className="bg-background rounded-lg p-4 border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
+                    {/* Cost Management Pillar */}
+                    <div className="bg-background rounded-lg p-4 border-l-4 border-blue-600 bg-blue-50 dark:bg-blue-950/20 hover:shadow-md transition-shadow">
                       <div className="flex items-center gap-3 mb-2">
-                        <CloudIcon provider="amazon" service="aws" size={24} />
-                        <span className="font-semibold text-sm">AWS</span>
+                        <DollarSign className="h-6 w-6 text-blue-600" />
+                        <span className="font-semibold text-sm text-blue-900 dark:text-blue-100">Cost Management</span>
                       </div>
-                      <div className="text-2xl font-bold text-orange-600 mb-1">$18,750</div>
+                      <div className="text-2xl font-bold text-blue-600 mb-1">$42,650</div>
                       <div className="flex items-center gap-1 text-xs">
                         <TrendingDown className="w-3 h-3 text-green-600" />
-                        <span className="text-green-600">↓ 8%</span>
-                        <span className="text-muted-foreground">vs last month</span>
+                        <span className="text-green-600">↓ 14%</span>
+                        <span className="text-muted-foreground">optimized</span>
                       </div>
                     </div>
                     
-                    <div className="bg-background rounded-lg p-4 border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
+                    {/* Resource Management Pillar */}
+                    <div className="bg-background rounded-lg p-4 border-l-4 border-green-600 bg-green-50 dark:bg-green-950/20 hover:shadow-md transition-shadow">
                       <div className="flex items-center gap-3 mb-2">
-                        <CloudIcon provider="microsoft" service="azure" size={24} />
-                        <span className="font-semibold text-sm">Azure</span>
+                        <Server className="h-6 w-6 text-green-600" />
+                        <span className="font-semibold text-sm text-green-900 dark:text-green-100">Resource Mgmt</span>
                       </div>
-                      <div className="text-2xl font-bold text-blue-600 mb-1">$12,340</div>
+                      <div className="text-2xl font-bold text-green-600 mb-1">1,247</div>
                       <div className="flex items-center gap-1 text-xs">
-                        <TrendingDown className="w-3 h-3 text-green-600" />
-                        <span className="text-green-600">↓ 15%</span>
-                        <span className="text-muted-foreground">vs last month</span>
+                        <span className="text-green-600">↑ 98%</span>
+                        <span className="text-muted-foreground">healthy</span>
                       </div>
                     </div>
                     
-                    <div className="bg-background rounded-lg p-4 border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
+                    {/* Performance Monitoring Pillar */}
+                    <div className="bg-background rounded-lg p-4 border-l-4 border-red-600 bg-red-50 dark:bg-red-950/20 hover:shadow-md transition-shadow">
                       <div className="flex items-center gap-3 mb-2">
-                        <CloudIcon provider="google" service="gcp" size={24} />
-                        <span className="font-semibold text-sm">GCP</span>
+                        <Activity className="h-6 w-6 text-red-600" />
+                        <span className="font-semibold text-sm text-red-900 dark:text-red-100">Performance</span>
                       </div>
-                      <div className="text-2xl font-bold text-green-600 mb-1">$7,650</div>
+                      <div className="text-2xl font-bold text-red-600 mb-1">99.8%</div>
                       <div className="flex items-center gap-1 text-xs">
-                        <TrendingDown className="w-3 h-3 text-green-600" />
-                        <span className="text-green-600">↓ 22%</span>
-                        <span className="text-muted-foreground">vs last month</span>
+                        <span className="text-green-600">↑ uptime</span>
+                        <span className="text-muted-foreground">optimal</span>
                       </div>
                     </div>
                     
-                    <div className="bg-background rounded-lg p-4 border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
+                    {/* Security & Compliance Pillar */}
+                    <div className="bg-background rounded-lg p-4 border-l-4 border-purple-600 bg-purple-50 dark:bg-purple-950/20 hover:shadow-md transition-shadow">
                       <div className="flex items-center gap-3 mb-2">
-                        <CloudIcon provider="microsoft" service="teams" size={24} />
-                        <span className="font-semibold text-sm">M365</span>
+                        <Shield className="h-6 w-6 text-purple-600" />
+                        <span className="font-semibold text-sm text-purple-900 dark:text-purple-100">Security</span>
                       </div>
-                      <div className="text-2xl font-bold text-purple-600 mb-1">$3,910</div>
+                      <div className="text-2xl font-bold text-purple-600 mb-1">94%</div>
                       <div className="flex items-center gap-1 text-xs">
-                        <TrendingDown className="w-3 h-3 text-green-600" />
-                        <span className="text-green-600">↓ 12%</span>
-                        <span className="text-muted-foreground">vs last month</span>
+                        <span className="text-green-600">↑ compliant</span>
+                        <span className="text-muted-foreground">secure</span>
                       </div>
                     </div>
                   </div>
@@ -127,14 +129,14 @@ export function HeroSection() {
                     <div className="flex items-center gap-4 text-xs text-muted-foreground">
                       <div className="flex items-center gap-1">
                         <Eye className="w-3 h-3" />
-                        <span>Real-time monitoring across all platforms</span>
+                        <span>Unified operations across all 4 pillars</span>
                       </div>
                     </div>
                     
                     <div className="flex items-center gap-2">
                       <div className="flex items-center gap-1 text-xs text-amber-600">
                         <AlertCircle className="w-3 h-3" />
-                        <span>3 optimization alerts</span>
+                        <span>5 optimization insights</span>
                       </div>
                     </div>
                   </div>
@@ -147,18 +149,18 @@ export function HeroSection() {
               <div className="bg-background border rounded-lg px-6 py-3 shadow-lg">
                 <div className="flex items-center gap-6 text-sm">
                   <div className="text-center">
-                    <div className="font-bold text-green-600">↓ 14%</div>
-                    <div className="text-muted-foreground">Avg Savings</div>
+                    <div className="font-bold text-green-600">↓ 70%</div>
+                    <div className="text-muted-foreground">Complexity</div>
                   </div>
                   <div className="w-px h-8 bg-border"></div>
                   <div className="text-center">
-                    <div className="font-bold text-blue-600">$42,650</div>
-                    <div className="text-muted-foreground">Total Managed</div>
+                    <div className="font-bold text-blue-600">4 Pillars</div>
+                    <div className="text-muted-foreground">Unified</div>
                   </div>
                   <div className="w-px h-8 bg-border"></div>
                   <div className="text-center">
                     <div className="font-bold text-purple-600">Live</div>
-                    <div className="text-muted-foreground">Data Sync</div>
+                    <div className="text-muted-foreground">Intelligence</div>
                   </div>
                 </div>
               </div>

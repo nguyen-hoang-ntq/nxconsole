@@ -66,8 +66,8 @@ export function AppLayout({ children }: AppLayoutProps) {
     <div className="flex h-screen bg-background">
       {/* Sidebar */}
       <aside className={cn(
-        'hidden md:flex flex-col border-r border-border',
-        sidebarCollapsed ? 'w-16' : 'w-64'
+        'hidden md:flex flex-col border-r border-border transition-all duration-300 relative',
+        sidebarCollapsed ? 'w-16' : 'w-80'
       )}>
         <AppSidebar 
           collapsed={sidebarCollapsed} 
@@ -82,7 +82,7 @@ export function AppLayout({ children }: AppLayoutProps) {
             className="absolute inset-0 bg-background/80 backdrop-blur-sm"
             onClick={() => setSidebarCollapsed(true)}
           />
-          <aside className="relative w-64 h-full">
+          <aside className="relative w-80 h-full">
             <AppSidebar 
               collapsed={false} 
               onToggle={() => setSidebarCollapsed(true)}

@@ -19,6 +19,8 @@ import {
   Cloud, 
   Users, 
   Shield,
+    TrendingUp, 
+    TrendingDown,
   Settings,
   BarChart3,
   FolderOpen,
@@ -314,7 +316,7 @@ export default function OneDrivePage() {
                         <div>
                           <div className="font-medium capitalize">{activity.type}s</div>
                           <div className="text-sm text-muted-foreground">
-                            {activity.trend === 'up' ? '↗️' : '↘️'} 
+                            {activity.trend === 'up' ? <TrendingUp className="inline w-4 h-4 text-green-600" /> : <TrendingDown className="inline w-4 h-4 text-red-600" />} 
                             {activity.trend === 'up' ? '+12%' : '-8%'}
                           </div>
                         </div>

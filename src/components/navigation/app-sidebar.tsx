@@ -22,12 +22,18 @@ import {
   Users,
   FileText,
   Cloud,
-  Database
+  Database,
+  Activity,
+  Network,
+  HardDrive,
+  Layers
 } from 'lucide-react';
 import Image from 'next/image';
 import { NavigationItem } from '@/types';
 import { CloudIcon } from '@/components/icons/cloud-icons';
 import { IconBadge } from '@/components/ui/icon-badge';
+import { useServiceHealth } from '@/contexts/service-health-context';
+import { ServiceHealthIndicator } from '@/components/shared/service-health-indicator';
 
 interface SidebarProps {
   collapsed?: boolean;
@@ -42,17 +48,153 @@ const navigationItems: NavigationItem[] = [
     icon: LayoutDashboard
   },
   {
-    id: 'finops',
-    label: 'FinOps & Cost',
-    href: '/dashboard/finops',
+    id: 'cost-management',
+    label: 'Cost Management',
+    href: '#',
     icon: DollarSign,
-    badge: { type: 'warning' }
+    badge: { type: 'warning' },
+    children: [
+      {
+        id: 'cost-overview',
+        label: 'Overview',
+        href: '/dashboard/cost-management',
+        icon: LayoutDashboard
+      },
+      {
+        id: 'cost-aws',
+        label: 'AWS Cost',
+        href: '/dashboard/cost-management/aws',
+        icon: () => <CloudIcon provider="amazon" service="aws" size={16} />
+      },
+      {
+        id: 'cost-azure',
+        label: 'Azure Cost',
+        href: '/dashboard/cost-management/azure',
+        icon: () => <CloudIcon provider="microsoft" service="azure" size={16} />
+      },
+      {
+        id: 'cost-gcp',
+        label: 'GCP Cost',
+        href: '/dashboard/cost-management/gcp',
+        icon: () => <CloudIcon provider="google" service="gcp" size={16} />
+      },
+      {
+        id: 'cost-m365',
+        label: 'M365 Cost',
+        href: '/dashboard/cost-management/m365',
+        icon: () => <CloudIcon provider="microsoft" service="m365" size={16} />
+      }
+    ]
   },
   {
-    id: 'resources',
-    label: 'Resources',
-    href: '/dashboard/resources',
-    icon: Server
+    id: 'resource-management',
+    label: 'Resource Management',
+    href: '#',
+    icon: Server,
+    children: [
+      {
+        id: 'resource-overview',
+        label: 'Overview',
+        href: '/dashboard/resource-management',
+        icon: LayoutDashboard
+      },
+      {
+        id: 'resource-compute',
+        label: 'Compute',
+        href: '/dashboard/resource-management/compute',
+        icon: Server
+      },
+      {
+        id: 'resource-networking',
+        label: 'Networking',
+        href: '/dashboard/resource-management/networking',
+        icon: Network
+      },
+      {
+        id: 'resource-storage',
+        label: 'Storage',
+        href: '/dashboard/resource-management/storage',
+        icon: HardDrive
+      },
+      {
+        id: 'resource-other',
+        label: 'Other Services',
+        href: '/dashboard/resource-management/other-services',
+        icon: Layers
+      }
+    ]
+  },
+  {
+    id: 'performance-monitoring',
+    label: 'Performance Monitoring',
+    href: '#',
+    icon: Activity,
+    badge: { type: 'new' },
+    children: [
+      {
+        id: 'performance-overview',
+        label: 'Overview',
+        href: '/dashboard/performance-monitoring',
+        icon: LayoutDashboard
+      },
+      {
+        id: 'performance-aws',
+        label: 'AWS Performance',
+        href: '/dashboard/performance-monitoring/aws',
+        icon: () => <CloudIcon provider="amazon" service="aws" size={16} />
+      },
+      {
+        id: 'performance-azure',
+        label: 'Azure Performance',
+        href: '/dashboard/performance-monitoring/azure',
+        icon: () => <CloudIcon provider="microsoft" service="azure" size={16} />
+      },
+      {
+        id: 'performance-gcp',
+        label: 'GCP Performance',
+        href: '/dashboard/performance-monitoring/gcp',
+        icon: () => <CloudIcon provider="google" service="gcp" size={16} />
+      }
+    ]
+  },
+  {
+    id: 'security-compliance',
+    label: 'Security & Compliance',
+    href: '#',
+    icon: Shield,
+    badge: { type: 'alert', count: 3 },
+    children: [
+      {
+        id: 'security-overview',
+        label: 'Overview',
+        href: '/dashboard/security-compliance',
+        icon: LayoutDashboard
+      },
+      {
+        id: 'security-aws',
+        label: 'AWS Security',
+        href: '/dashboard/security-compliance/aws',
+        icon: () => <CloudIcon provider="amazon" service="aws" size={16} />
+      },
+      {
+        id: 'security-azure',
+        label: 'Azure Security',
+        href: '/dashboard/security-compliance/azure',
+        icon: () => <CloudIcon provider="microsoft" service="azure" size={16} />
+      },
+      {
+        id: 'security-gcp',
+        label: 'GCP Security',
+        href: '/dashboard/security-compliance/gcp',
+        icon: () => <CloudIcon provider="google" service="gcp" size={16} />
+      },
+      {
+        id: 'compliance-reports',
+        label: 'Compliance Reports',
+        href: '/dashboard/security-compliance/compliance',
+        icon: FileText
+      }
+    ]
   },
   {
     id: 'ai-insights',
@@ -60,13 +202,6 @@ const navigationItems: NavigationItem[] = [
     href: '/dashboard/ai-insights',
     icon: Brain,
     badge: { type: 'new' }
-  },
-  {
-    id: 'security',
-    label: 'Security',
-    href: '/dashboard/security',
-    icon: Shield,
-    badge: { type: 'alert', count: 3 }
   },
   {
     id: 'cloud-management',
@@ -234,7 +369,8 @@ const secondaryItems: NavigationItem[] = [
 
 export function AppSidebar({ collapsed = false, onToggle }: SidebarProps) {
   const pathname = usePathname();
-  const [expandedItems, setExpandedItems] = useState<string[]>(['cloud-management']);
+  const [expandedItems, setExpandedItems] = useState<string[]>(['cost-management', 'resource-management', 'performance-monitoring', 'security-compliance', 'cloud-management']);
+  const { serviceHealth } = useServiceHealth();
   
   const toggleExpanded = (itemId: string) => {
     setExpandedItems(prev => 
@@ -242,6 +378,16 @@ export function AppSidebar({ collapsed = false, onToggle }: SidebarProps) {
         ? prev.filter(id => id !== itemId)
         : [...prev, itemId]
     );
+  };
+  
+  // Helper function to get service health status for cloud provider items
+  const getServiceHealthForItem = (itemId: string) => {
+    if (itemId.includes('aws')) return serviceHealth.aws;
+    if (itemId.includes('azure')) return serviceHealth.azure;
+    if (itemId.includes('gcp')) return serviceHealth.gcp;
+    if (itemId.includes('microsoft365') || itemId.includes('m365')) return serviceHealth.microsoft365;
+    if (itemId.includes('google')) return serviceHealth.googleWorkspace;
+    return null;
   };
   
   const NavItem = ({ item, level = 0 }: { item: NavigationItem; level?: number }) => {
@@ -329,6 +475,12 @@ export function AppSidebar({ collapsed = false, onToggle }: SidebarProps) {
                 <>
                   <span className="flex-1 min-w-0 text-left truncate">{item.label}</span>
                   <div className="flex items-center gap-1 flex-shrink-0">
+                    {getServiceHealthForItem(item.id) && (
+                      <ServiceHealthIndicator 
+                        status={getServiceHealthForItem(item.id)!} 
+                        size="sm"
+                      />
+                    )}
                     {hasChildren && (
                       <ChevronDown className={cn(
                         'h-4 w-4 transition-transform',
@@ -375,11 +527,11 @@ export function AppSidebar({ collapsed = false, onToggle }: SidebarProps) {
   
   return (
     <div className={cn(
-      'flex flex-col h-full bg-card border-r border-border',
-      collapsed ? 'w-16' : 'w-64'
+      'flex flex-col h-full bg-card border-r border-border transition-all duration-300',
+      collapsed ? 'w-16' : 'w-80'
     )}>
-      {/* Header */}
-      <div className="flex items-center gap-3 h-16 px-4 border-b border-border">
+      {/* Header - Fixed height to match top bar */}
+      <div className="flex items-center gap-3 h-16 px-4 border-b border-border flex-shrink-0">
         <div className="rounded-lg p-2 flex items-center justify-center w-10 h-10">
           <Image 
             src="/logo.png" 
@@ -410,26 +562,29 @@ export function AppSidebar({ collapsed = false, onToggle }: SidebarProps) {
             variant="ghost"
             size="sm"
             onClick={onToggle}
-            className="h-8 w-8 p-0 absolute top-4 -right-3 bg-background border border-border shadow-sm"
+            className="h-8 w-8 p-0 absolute top-4 -right-4 bg-background border border-border shadow-lg hover:bg-accent z-50 rounded-full"
+            title="Mở rộng sidebar"
           >
-            <ChevronLeft className="h-4 w-4 rotate-180" />
+            <ChevronRight className="h-4 w-4" />
           </Button>
         )}
       </div>
       
-      {/* Navigation */}
-      <div className="flex-1 p-3 space-y-1">
-        <nav>
-          <ul className="space-y-1">
-            {navigationItems.map((item) => (
-              <NavItem key={item.id} item={item} />
-            ))}
-          </ul>
-        </nav>
+      {/* Navigation - Scrollable with custom scrollbar */}
+      <div className="flex-1 overflow-y-auto overflow-x-hidden custom-scrollbar">
+        <div className="p-3 space-y-1">
+          <nav>
+            <ul className="space-y-1">
+              {navigationItems.map((item) => (
+                <NavItem key={item.id} item={item} />
+              ))}
+            </ul>
+          </nav>
+        </div>
       </div>
       
-      {/* Secondary Navigation */}
-      <div className="p-3 border-t border-border">
+      {/* Secondary Navigation - Fixed at bottom */}
+      <div className="p-3 border-t border-border flex-shrink-0">
         <nav>
           <ul className="space-y-1">
             {secondaryItems.map((item) => (

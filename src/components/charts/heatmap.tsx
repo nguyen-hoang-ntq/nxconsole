@@ -1,8 +1,10 @@
 'use client';
 
-import React from 'react';
-import { ResponsiveContainer, Tooltip } from 'recharts';
+import React, { useState } from 'react';
+import { ResponsiveContainer } from 'recharts';
 import { ChartContainer } from './chart-container';
+import { getChartConfig } from '@/lib/chart-colors';
+import { useTheme } from '@/hooks/use-theme';
 
 interface HeatmapData {
   x: string | number;
@@ -54,6 +56,11 @@ export function HeatmapComponent({
   formatValue,
   onCellClick
 }: HeatmapComponentProps) {
+  const { isDarkMode } = useTheme();
+  const chartConfig = getChartConfig(isDarkMode);
+  const [hoveredCell, setHoveredCell] = useState<HeatmapData | null>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
   // Calculate min/max values if not provided
   const values = data.map(d => d.value);
   const min = minValue ?? Math.min(...values);
@@ -81,44 +88,52 @@ export function HeatmapComponent({
     dataLookup.set(key, item);
   });
 
-  const CustomTooltip = ({ active, coordinate }: { active?: boolean; payload?: unknown; coordinate?: { x: number; y: number } }) => {
-    if (active && coordinate) {
-      // Find the nearest cell based on coordinate
-      const cellX = Math.floor((coordinate.x - 50) / (cellSize + gap));
-      const cellY = Math.floor((coordinate.y - 50) / (cellSize + gap));
-      
-      if (cellX >= 0 && cellX < xValues.length && cellY >= 0 && cellY < yValues.length) {
-        const x = xValues[cellX];
-        const y = yValues[cellY];
-        const key = `${x}-${y}`;
-        const cellData = dataLookup.get(key);
-        
-        if (cellData) {
-          return (
-            <div className="bg-background border border-border rounded-lg shadow-lg p-3">
-              <p className="font-medium text-sm">
-                {cellData.label || `${x}, ${y}`}
-              </p>
-              <p className="text-sm text-muted-foreground">
-                {formatTooltip 
-                  ? formatTooltip(cellData.value, x, y)
-                  : `Value: ${formatValue ? formatValue(cellData.value) : cellData.value}`
-                }
-              </p>
-            </div>
-          );
-        }
-      }
-    }
-    return null;
+  const CustomTooltip = () => {
+    if (!hoveredCell || !showTooltip) return null;
+    
+    return (
+      <div 
+        className="absolute z-10 bg-background border border-border rounded-lg p-2 shadow-lg pointer-events-none"
+        style={{
+          left: mousePosition.x + 10,
+          top: mousePosition.y - 10,
+        }}
+      >
+        <p className="font-medium text-sm">
+          {hoveredCell.label || `${hoveredCell.x}, ${hoveredCell.y}`}
+        </p>
+        <p className="text-sm text-muted-foreground">
+          {formatTooltip 
+            ? formatTooltip(hoveredCell.value, hoveredCell.x, hoveredCell.y)
+            : `Value: ${formatValue ? formatValue(hoveredCell.value) : hoveredCell.value}`
+          }
+        </p>
+      </div>
+    );
   };
 
   const totalWidth = xValues.length * cellSize + (xValues.length - 1) * gap + 100;
   const totalHeight = yValues.length * cellSize + (yValues.length - 1) * gap + 100;
 
+  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    setMousePosition({
+      x: event.clientX - rect.left,
+      y: event.clientY - rect.top
+    });
+  };
+
+  const handleCellHover = (cellData: HeatmapData | null) => {
+    setHoveredCell(cellData);
+  };
+
   const content = (
     <ResponsiveContainer width="100%" height={height}>
-      <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+      <div 
+        style={{ width: '100%', height: '100%', position: 'relative' }}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={() => setHoveredCell(null)}
+      >
         <svg 
           width={width || totalWidth} 
           height={totalHeight}
@@ -132,7 +147,7 @@ export function HeatmapComponent({
               y={40}
               textAnchor="middle"
               fontSize="12"
-              fill="currentColor"
+              fill={chartConfig.xAxis.tick.fill}
               className="text-muted-foreground"
             >
               {x}
@@ -147,7 +162,7 @@ export function HeatmapComponent({
               y={50 + yIndex * (cellSize + gap) + cellSize / 2 + 4}
               textAnchor="end"
               fontSize="12"
-              fill="currentColor"
+              fill={chartConfig.yAxis.tick.fill}
               className="text-muted-foreground"
             >
               {y}
@@ -170,17 +185,18 @@ export function HeatmapComponent({
                   width={cellSize}
                   height={cellSize}
                   fill={color}
-                  stroke="#ffffff"
+                  stroke={isDarkMode ? 'hsl(var(--border))' : '#ffffff'}
                   strokeWidth={1}
                   style={{ cursor: onCellClick ? 'pointer' : 'default' }}
                   onClick={() => cellData && onCellClick?.(cellData)}
+                  onMouseEnter={() => handleCellHover(cellData)}
                   className="transition-opacity hover:opacity-80"
                 />
               );
             })
           )}
         </svg>
-        {showTooltip && <Tooltip content={<CustomTooltip />} />}
+        <CustomTooltip />
       </div>
     </ResponsiveContainer>
   );

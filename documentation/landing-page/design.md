@@ -1,267 +1,399 @@
-# Landing Page Design Specification
+# Landing Page Design - Unified Cloud Management Platform
 
 ## Design Philosophy
-Create a modern, professional, and trustworthy landing page that reflects NTQ Solution's enterprise-grade quality while showcasing NxConsole's core mission: unified cost management and centralized control across multiple cloud platforms (AWS, Azure, Google Cloud, Microsoft 365).
 
-## Visual Design System
+### Core Design Principles
 
-### Color Palette
-**Primary Colors** (Based on existing NxConsole theme)
-- Primary Blue: `hsl(221.2 83.2% 53.3%)` - Main CTAs and highlights
-- Primary Foreground: `hsl(210 40% 98%)` - Text on primary buttons
-- Secondary: `hsl(210 40% 96%)` - Secondary buttons and accents
+#### 1. Pillar-Centric Architecture
+- **Visual Hierarchy**: Clear visual distinction between the 4 operational pillars
+- **Unified Experience**: Consistent design language across all operational domains
+- **Professional Interface**: Enterprise-grade aesthetics building trust and confidence
+- **Operational Focus**: Design emphasizing actionable insights and management capabilities
 
-**Neutral Colors**
-- Background: `hsl(0 0% 100%)` - Main background (light mode)
-- Foreground: `hsl(222.2 84% 4.9%)` - Primary text
-- Muted: `hsl(210 40% 96%)` - Secondary backgrounds
-- Muted Foreground: `hsl(215.4 16.3% 46.9%)` - Secondary text
-- Border: `hsl(214.3 31.8% 91.4%)` - Dividers and borders
+#### 2. Multi-Cloud Platform Identity
+- **Provider Recognition**: Official cloud provider branding integration (AWS, Azure, GCP, M365)
+- **Unified Presentation**: Consistent visual treatment across all supported platforms
+- **Professional Standards**: Enterprise-level design matching cloud provider aesthetics
+- **Platform Neutrality**: Balanced representation without favoring any single provider
 
-**Accent Colors**
-- Success Green: `hsl(142.1 76.2% 36.3%)` - Success states, positive metrics
-- Warning Orange: `hsl(45.4 93.4% 47.5%)` - Attention items
-- Destructive Red: `hsl(0 84.2% 60.2%)` - Error states
+#### 3. Enterprise Operations Design
+- **Dashboard-First Approach**: Design optimized for operational monitoring and management
+- **Data-Driven Interface**: Clear visualization of metrics, trends, and insights
+- **Responsive Operations**: Mobile-optimized for on-call teams and executives
+- **Professional Color Palette**: Trust-building colors appropriate for enterprise environments
 
-### Typography
-**Primary Font**: System font stack (`-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto`)
+## Visual Identity & Brand Guidelines
 
-**Hierarchy**:
-- H1 (Hero): `text-4xl lg:text-6xl font-bold` - Main headline
-- H2 (Sections): `text-3xl lg:text-4xl font-bold` - Section titles
-- H3 (Features): `text-xl lg:text-2xl font-semibold` - Feature titles
-- H4 (Cards): `text-lg font-semibold` - Card titles
-- Body Large: `text-lg` - Hero subtext, important descriptions
-- Body: `text-base` - Standard body text
-- Body Small: `text-sm` - Captions, metadata
-- Caption: `text-xs` - Fine print, labels
+### Color System
 
-### Spacing & Layout
-**Container Widths**:
-- Max container width: `7xl` (1280px)
-- Standard padding: `px-4 lg:px-8`
-- Section spacing: `py-16 lg:py-24`
+#### Primary Pillar Colors
+```css
+/* Cost Management Pillar */
+--cost-primary: #2563eb;     /* Professional blue for financial data */
+--cost-secondary: #dbeafe;   /* Light blue for backgrounds */
+--cost-accent: #1d4ed8;      /* Darker blue for emphasis */
 
-**Grid System**:
-- 12-column grid for complex layouts
-- Feature cards: 1-col mobile, 2-col tablet, 3-col desktop
-- Benefits: 1-col mobile, 2-col desktop
-- Testimonials: 1-col mobile, 2-col desktop
+/* Resource Management Pillar */
+--resource-primary: #059669; /* Growth green for resources */
+--resource-secondary: #d1fae5; /* Light green for backgrounds */
+--resource-accent: #047857;   /* Darker green for emphasis */
 
-### Component Design
+/* Performance Monitoring Pillar */
+--performance-primary: #dc2626; /* Alert red for performance monitoring */
+--performance-secondary: #fee2e2; /* Light red for backgrounds */
+--performance-accent: #b91c1c;   /* Darker red for emphasis */
 
-#### Hero Section
-```
-Layout: Full-width background with centered content
-- Headline: Large, bold, attention-grabbing
-- Subheadline: Supporting text explaining value proposition
-- CTA Buttons: Primary "Start Free Trial" + Secondary "Watch Demo"
-- Hero Visual: Dashboard screenshot or animated preview
-- Background: Subtle gradient or pattern
+/* Security & Compliance Pillar */
+--security-primary: #7c3aed;   /* Security purple for compliance */
+--security-secondary: #ede9fe; /* Light purple for backgrounds */
+--security-accent: #6d28d9;    /* Darker purple for emphasis */
 ```
 
-#### Navigation Bar
-```
-Layout: Fixed/sticky top navigation
-- Logo: NxConsole brand mark + wordmark
-- Navigation: Links to sections (Features, Benefits, Pricing, About)
-- CTA Buttons: "Login" (outline) + "Sign Up" (filled)
-- Mobile: Hamburger menu with slide-out drawer
-```
+#### Supporting Colors
+```css
+/* Professional Grays */
+--gray-50: #f9fafb;
+--gray-100: #f3f4f6;
+--gray-200: #e5e7eb;
+--gray-300: #d1d5db;
+--gray-400: #9ca3af;
+--gray-500: #6b7280;
+--gray-600: #4b5563;
+--gray-700: #374151;
+--gray-800: #1f2937;
+--gray-900: #111827;
 
-#### Feature Cards
-```
-Layout: Grid of cards showcasing multi-cloud cost management capabilities
-- Cloud Platform Icons: Use existing project CloudIcon components
-  * AWS: <CloudIcon provider="amazon" size={48} /> (official AWS orange logo)
-  * Azure: <CloudIcon provider="microsoft" service="azure" size={48} /> (official Azure blue logo)
-  * Google Cloud: <CloudIcon provider="google" service="gcp" size={48} /> (official GCP logo)
-  * Microsoft 365: <CloudIcon provider="microsoft" size={48} /> (official M365 logo)
-- Feature Icons: 48x48px Lucide icons for cost management features (DollarSign, TrendingDown, BarChart3, PieChart)
-- Title: Bold, clear feature name emphasizing cost control and platform unification
-- Description: 2-3 lines explaining cost savings and management benefits
-- Visual: Optional cost analytics screenshots or platform integration diagrams
-- Hover: Subtle elevation with cost savings highlights
-```
+/* Multi-Cloud Platform Colors */
+--aws-orange: #ff9900;
+--azure-blue: #0078d4;
+--gcp-blue: #4285f4;
+--m365-red: #d83b01;
 
-#### Benefits Section
-```
-Layout: Alternating text and visual layout emphasizing cost optimization
-- Large Cost Savings Numbers: Prominently displayed percentage savings (20-40% cost reduction)
-- Platform Statistics: Number of clouds managed, total cost visibility
-- ROI Metrics: Time-to-value for cost optimization, monthly savings achieved
-- Visual elements: Cost trend charts, savings graphs, multi-cloud cost breakdowns
-- Background: Alternating light/white sections with subtle cost-themed backgrounds
+/* Status & Alert Colors */
+--success: #10b981;
+--warning: #f59e0b;
+--error: #ef4444;
+--info: #3b82f6;
 ```
 
-#### Social Proof Section
-```
-Layout: Testimonial cards with client information
-- Quote: Large, readable testimonial text
-- Attribution: Name, title, company with logo
-- Stats: Key numbers (350+ clients, 14+ years, etc.)
-- Logo Wall: Grid of client company logos
-```
+### Typography System
 
-#### Footer
-```
-Layout: Multi-column footer with comprehensive links
-- Company info: NTQ Solution details and contact
-- Product links: Key feature pages and resources
-- Legal: Privacy, Terms, Cookie Policy
-- Social: Professional social media links
-- Newsletter: Optional email signup
+#### Font Families
+```css
+/* Primary Font - Professional Sans-Serif */
+--font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+/* Secondary Font - System Fonts for Performance */
+--font-secondary: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+/* Monospace Font - Code and Data */
+--font-mono: 'JetBrains Mono', 'Fira Code', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
 ```
 
-## Responsive Design
+#### Typography Scale
+```css
+/* Heading Sizes */
+--text-6xl: 3.75rem;    /* 60px - Main hero headlines */
+--text-5xl: 3rem;       /* 48px - Section headlines */
+--text-4xl: 2.25rem;    /* 36px - Sub-section headlines */
+--text-3xl: 1.875rem;   /* 30px - Card titles */
+--text-2xl: 1.5rem;     /* 24px - Component headers */
+--text-xl: 1.25rem;     /* 20px - Large text */
 
-### Breakpoints
-- Mobile: `< 640px` - Single column, stacked layout
-- Tablet: `640px - 1024px` - Two column, adjusted spacing
-- Desktop: `1024px - 1280px` - Multi-column, full features
-- Large: `> 1280px` - Max-width container, optimal spacing
+/* Body Text Sizes */
+--text-lg: 1.125rem;    /* 18px - Large body text */
+--text-base: 1rem;      /* 16px - Standard body text */
+--text-sm: 0.875rem;    /* 14px - Small text */
+--text-xs: 0.75rem;     /* 12px - Caption text */
+```
 
-### Mobile-First Approach
-1. **Navigation**: Hamburger menu with slide-out drawer
-2. **Hero**: Stacked content, larger touch targets
-3. **Features**: Single column cards with full-width
-4. **Benefits**: Simplified layout, key metrics only
-5. **Footer**: Accordion-style collapsible sections
+### Spacing & Layout System
 
-## Animation & Interactions
+#### Grid System
+```css
+/* Container Widths */
+--container-sm: 640px;
+--container-md: 768px;
+--container-lg: 1024px;
+--container-xl: 1280px;
+--container-2xl: 1536px;
 
-### Micro-Interactions
-- Button hover states: Color changes, subtle elevation
-- Card hovers: Shadow increase, border highlight
-- Form focus: Clear input highlighting
-- Link hovers: Underline animations
+/* Spacing Scale */
+--space-1: 0.25rem;   /* 4px */
+--space-2: 0.5rem;    /* 8px */
+--space-3: 0.75rem;   /* 12px */
+--space-4: 1rem;      /* 16px */
+--space-5: 1.25rem;   /* 20px */
+--space-6: 1.5rem;    /* 24px */
+--space-8: 2rem;      /* 32px */
+--space-10: 2.5rem;   /* 40px */
+--space-12: 3rem;     /* 48px */
+--space-16: 4rem;     /* 64px */
+--space-20: 5rem;     /* 80px */
+--space-24: 6rem;     /* 96px */
+```
 
-### Page Animations
-- Scroll-triggered fade-ins for sections
-- Counter animations for statistics
-- Smooth scrolling between sections
-- Loading states for form submissions
+## Component Design System
 
-### Performance Considerations
-- CSS-based animations preferred over JavaScript
-- Respect `prefers-reduced-motion` user preferences
-- Optimize for 60fps performance
-- Lazy load non-critical animations
+### Hero Section Design
 
-## Accessibility Design
+#### Layout Structure
+```
+Hero Container (Full Viewport Height)
+├── Background: Subtle gradient with cloud-themed patterns
+├── Content Container (Centered, Max-width 1280px)
+│   ├── Headline (text-6xl, gradient text effect)
+│   ├── Subtitle (text-xl, supporting message)
+│   ├── CTA Button Group (Primary + Secondary actions)
+│   └── Platform Logos (AWS, Azure, GCP, M365)
+└── Hero Visual (Unified dashboard preview)
+```
 
-### Color & Contrast
-- Minimum 4.5:1 contrast ratio for normal text
-- Minimum 3:1 contrast ratio for large text
-- Color never used as the only means of communication
-- Focus indicators clearly visible
+#### Visual Elements
+- **Background**: Subtle gradient from blue to purple with geometric cloud patterns
+- **Headlines**: Large, bold typography with gradient text effects
+- **Buttons**: Professional design with subtle shadows and hover animations
+- **Platform Integration**: Official provider logos in a clean horizontal layout
 
-### Navigation & Structure
-- Logical heading hierarchy (H1 → H2 → H3)
-- Skip links for keyboard navigation
-- Clear focus management
-- Meaningful link text (no "click here")
+### 4-Pillar Showcase Design
 
-### Content & Media
-- Alt text for all meaningful images
-- Captions for video content
-- Descriptive error messages
-- Clear form labels and instructions
+#### Card Layout System
+```
+Pillar Grid (4 columns on desktop, 2 on tablet, 1 on mobile)
+├── Cost Management Card
+│   ├── Icon (Dollar sign with blue accent)
+│   ├── Title (Cost Management)
+│   ├── Description (Financial control capabilities)
+│   └── Key Features List
+├── Resource Management Card
+│   ├── Icon (Server/Resources with green accent)
+│   ├── Title (Resource Management)
+│   ├── Description (Asset lifecycle management)
+│   └── Key Features List
+├── Performance Monitoring Card
+│   ├── Icon (Activity/Performance with red accent)
+│   ├── Title (Performance Monitoring)
+│   ├── Description (Real-time operational intelligence)
+│   └── Key Features List
+└── Security & Compliance Card
+    ├── Icon (Shield/Security with purple accent)
+    ├── Title (Security & Compliance)
+    ├── Description (Protection and governance)
+    └── Key Features List
+```
 
-## Content Strategy
+#### Card Design Specifications
+- **Dimensions**: Equal height cards with responsive width
+- **Background**: White with subtle border and shadow
+- **Icons**: Large (48px) with pillar-specific colors
+- **Typography**: Clear hierarchy with titles and descriptions
+- **Hover Effects**: Subtle elevation and accent color highlights
 
-### Tone of Voice
-- **Professional**: Enterprise-grade confidence
-- **Innovative**: Cutting-edge technology leader
-- **Trustworthy**: Reliable global partner
-- **Clear**: Technical complexity made simple
+### Multi-Cloud Platform Integration Section
 
-### Key Messages
-1. **Headline**: "Unified Multi-Cloud Cost Management Platform"
-2. **Value Prop**: "Control costs, optimize spending, and manage AWS, Azure, Google Cloud & Microsoft 365 from one powerful dashboard"
-3. **Trust Builder**: "Trusted by 350+ global clients to optimize millions in cloud spending across 30 industries"
-4. **Innovation**: "Real-time cost intelligence and automated optimization across all your cloud platforms"
+#### Platform Showcase Layout
+```
+Platform Grid (4 columns showcasing cloud providers)
+├── AWS Integration
+│   ├── Official AWS Logo (Orange accent)
+│   ├── Service Icons (EC2, S3, RDS, Lambda)
+│   ├── Capability List
+│   └── Integration Depth Indicator
+├── Azure Integration
+│   ├── Official Azure Logo (Blue accent)
+│   ├── Service Icons (VMs, Storage, Functions)
+│   ├── Capability List
+│   └── Integration Depth Indicator
+├── GCP Integration
+│   ├── Official GCP Logo (Multi-color)
+│   ├── Service Icons (Compute, Storage, Functions)
+│   ├── Capability List
+│   └── Integration Depth Indicator
+└── M365 Integration
+    ├── Official M365 Logo (Red accent)
+    ├── Service Icons (Teams, SharePoint, OneDrive)
+    ├── Capability List
+    └── Integration Depth Indicator
+```
 
-### SEO Considerations
-- Target keywords: "multi-cloud cost management", "unified cloud cost control", "AWS Azure Google Cloud cost optimization", "cloud financial management", "FinOps platform"
-- Semantic HTML structure
-- Optimized meta descriptions
-- Internal linking strategy
+### Benefits & ROI Section Design
 
-## Brand Alignment
+#### Metrics Visualization
+```
+Benefits Grid (3 columns with key metrics)
+├── Operational Efficiency
+│   ├── Large Number Display (70% Complexity Reduction)
+│   ├── Supporting Metric
+│   └── Brief Description
+├── Cost Optimization
+│   ├── Large Number Display (30% Average Savings)
+│   ├── Supporting Metric
+│   └── Brief Description
+└── Risk Reduction
+    ├── Large Number Display (90% Compliance Score)
+    ├── Supporting Metric
+    └── Brief Description
+```
 
-### NTQ Solution Integration
-- Subtle NTQ branding in footer and about section
-- Link to main NTQ website (ntq.com.vn)
-- Consistent with NTQ's enterprise positioning
-- Professional imagery and tone
+### Social Proof Section Design
 
-### NxUniverse Ecosystem
-- Reference to NxUniverse cloud ecosystem
-- Positioning as flagship product
-- Integration messaging with other NTQ solutions
-- Scalability and enterprise focus
+#### Testimonial Cards
+```
+Testimonial Grid (3 columns)
+├── Client Testimonial 1
+│   ├── Quote Text
+│   ├── Client Photo/Logo
+│   ├── Name & Title
+│   └── Company Information
+├── Client Testimonial 2
+│   ├── Quote Text
+│   ├── Client Photo/Logo
+│   ├── Name & Title
+│   └── Company Information
+└── Client Testimonial 3
+    ├── Quote Text
+    ├── Client Photo/Logo
+    ├── Name & Title
+    └── Company Information
+```
 
-## Asset Requirements
+#### Company Credentials
+```
+Credentials Bar (Horizontal layout)
+├── Years of Experience (14+ Years)
+├── Client Count (350+ Clients)
+├── Global Presence (5 Branches)
+├── Industry Coverage (30 Industries)
+└── Project Success (760+ Projects)
+```
 
-### Images
-- Hero background: High-quality, technology-focused
-- Dashboard screenshots: Current NxConsole interface
-- Feature illustrations: Custom icons or graphics
-- Client logos: Professional, consistent sizing
-- Team photos: Professional headshots (if needed)
+## Icon System & Visual Elements
 
-### Icons
-- **Cloud Platform Icons**: Use existing CloudIcon and PlatformIcon components from project
-  * AWS: `<CloudIcon provider="amazon" />` or `<AWSIcon />` (official AWS orange logo)
-  * Microsoft Azure: `<CloudIcon provider="microsoft" service="azure" />` or `<AzureIcon />` (official Azure blue logo)  
-  * Google Cloud: `<CloudIcon provider="google" service="gcp" />` or `<GCPIcon />` (official Google Cloud multi-color logo)
-  * Microsoft 365: `<CloudIcon provider="microsoft" />` or `<M365Icon />` (official Microsoft 365 logo)
-- **Cost Management Icons**: Lucide React icons for financial features
-  * Cost tracking: `DollarSign`, `TrendingDown`, `TrendingUp`
-  * Analytics: `BarChart3`, `PieChart`, `LineChart`
-  * Optimization: `Target`, `Zap`, `Settings`
-- **UI icons**: Consistent style and sizing with existing dashboard
-- **Loading/status indicators**: Animated where appropriate for cost updates
+### Core Icon Library
 
-### Graphics
-- **Cost Analytics Visualizations**: Charts showing cost savings across cloud platforms
-- **Multi-Cloud Architecture Diagrams**: Visual showing unified control across AWS, Azure, Google Cloud, Microsoft 365
-- **Cost Optimization Flows**: User journey diagrams for cost management workflows
-- **ROI Infographics**: Statistics showing cost savings and financial benefits
+#### Pillar Icons
+```typescript
+// Cost Management Icons
+<DollarSign size={48} className="text-cost-primary" />
+<TrendingDown size={32} className="text-cost-accent" />
+<PieChart size={32} className="text-cost-primary" />
+<BarChart3 size={32} className="text-cost-accent" />
 
-## Technical Implementation Notes
+// Resource Management Icons
+<Server size={48} className="text-resource-primary" />
+<HardDrive size={32} className="text-resource-accent" />
+<Cpu size={32} className="text-resource-primary" />
+<Database size={32} className="text-resource-accent" />
 
-### Performance Optimization
-- Image optimization: WebP format with fallbacks
-- Code splitting: Route-based lazy loading
-- Critical CSS: Above-the-fold content prioritized
-- Font optimization: Subset loading, display swapping
+// Performance Monitoring Icons
+<Activity size={48} className="text-performance-primary" />
+<Zap size={32} className="text-performance-accent" />
+<Monitor size={32} className="text-performance-primary" />
+<AlertTriangle size={32} className="text-performance-accent" />
 
-### SEO Implementation
-- Structured data: Organization, Product, Review schemas
-- Open Graph: Social sharing optimization
-- Twitter Cards: Enhanced social presence
-- Sitemap: Automated generation and submission
+// Security & Compliance Icons
+<Shield size={48} className="text-security-primary" />
+<Lock size={32} className="text-security-accent" />
+<UserCheck size={32} className="text-security-primary" />
+<FileCheck size={32} className="text-security-accent" />
+```
 
-### Analytics Integration
-- Google Analytics 4: Conversion tracking
-- Event tracking: CTA clicks, form submissions
-- Heat mapping: User behavior analysis (future)
-- A/B testing: Conversion optimization (future)
+#### Cloud Provider Icons
+```typescript
+// Import from existing components
+import { CloudIcon } from '@/components/icons/cloud-icons';
+import { AWSIcon, AzureIcon, GCPIcon, M365Icon } from '@/components/icons/platform-icons';
 
-## Design Deliverables
+// Usage in landing page
+<CloudIcon provider="amazon" size={64} />
+<CloudIcon provider="microsoft" service="azure" size={64} />
+<CloudIcon provider="google" service="gcp" size={64} />
+<CloudIcon provider="microsoft" size={64} />
+```
 
-### Required Outputs
-1. **Wireframes**: Low-fidelity layout structure
-2. **Visual Mockups**: High-fidelity design comps
-3. **Component Library**: Reusable design elements
-4. **Style Guide**: Colors, typography, spacing rules
-5. **Responsive Views**: Mobile, tablet, desktop layouts
-6. **Interactive Prototype**: Clickable user flows
+### Animation & Interaction Design
 
-### File Formats
-- Design files: Figma (preferred) or Adobe XD
-- Assets: SVG for icons, WebP/PNG for images
-- Documentation: Markdown with embedded images
-- Code examples: HTML/CSS snippets for developers
+#### Micro-Interactions
+- **Button Hover**: Subtle elevation and color transition (300ms ease)
+- **Card Hover**: Shadow elevation and border color change (200ms ease)
+- **Icon Animations**: Gentle pulse or rotation on hover (400ms ease-in-out)
+- **Scroll Animations**: Fade-in and slide-up for sections (600ms ease-out)
+
+#### Page Transitions
+- **Smooth Scrolling**: Enabled for internal navigation links
+- **Loading States**: Professional skeleton screens for content loading
+- **Progressive Enhancement**: Core content loads first, enhancements layer on
+
+## Responsive Design Strategy
+
+### Breakpoint System
+```css
+/* Mobile First Approach */
+@media (min-width: 640px) { /* sm */ }
+@media (min-width: 768px) { /* md */ }
+@media (min-width: 1024px) { /* lg */ }
+@media (min-width: 1280px) { /* xl */ }
+@media (min-width: 1536px) { /* 2xl */ }
+```
+
+### Layout Adaptations
+
+#### Mobile (320px - 640px)
+- **Hero**: Single column, reduced text sizes, stacked CTAs
+- **Pillars**: Single column cards with full-width layout
+- **Platform Integration**: Vertical stack with accordion behavior
+- **Navigation**: Hamburger menu with slide-out panel
+
+#### Tablet (640px - 1024px)
+- **Hero**: Maintained layout with adjusted spacing
+- **Pillars**: 2x2 grid layout for pillar cards
+- **Platform Integration**: 2x2 grid for platform showcase
+- **Navigation**: Horizontal navigation with dropdowns
+
+#### Desktop (1024px+)
+- **Hero**: Full layout with sidebar visual elements
+- **Pillars**: 4-column grid with equal heights
+- **Platform Integration**: 4-column horizontal layout
+- **Navigation**: Full horizontal navigation with mega-menus
+
+## Accessibility Design Standards
+
+### WCAG 2.1 AA Compliance
+
+#### Color Contrast Requirements
+- **Normal Text**: Minimum 4.5:1 contrast ratio
+- **Large Text**: Minimum 3:1 contrast ratio
+- **Interactive Elements**: Clear focus indicators with 3:1 contrast
+
+#### Keyboard Navigation
+- **Tab Order**: Logical flow through all interactive elements
+- **Focus Management**: Visible focus indicators on all focusable elements
+- **Skip Links**: Navigation bypass for screen reader users
+
+#### Screen Reader Support
+- **Semantic HTML**: Proper heading hierarchy and landmark roles
+- **Alt Text**: Descriptive alternative text for all images
+- **ARIA Labels**: Appropriate labels for complex interactive elements
+
+## Performance Design Considerations
+
+### Optimization Strategies
+
+#### Image Optimization
+- **Format Selection**: WebP with JPEG fallback for broad compatibility
+- **Responsive Images**: Multiple sizes for different device capabilities
+- **Lazy Loading**: Progressive loading for images below the fold
+- **Compression**: Optimized file sizes without quality loss
+
+#### Code Optimization
+- **CSS**: Critical CSS inlined, non-critical CSS loaded asynchronously
+- **JavaScript**: Code splitting with lazy loading for non-essential features
+- **Fonts**: Optimized font loading with font-display: swap
+
+#### Performance Budget
+- **First Contentful Paint**: Under 1.5 seconds
+- **Largest Contentful Paint**: Under 2.5 seconds
+- **Cumulative Layout Shift**: Under 0.1
+- **Time to Interactive**: Under 3.5 seconds
+
+This design system provides comprehensive guidelines for creating a professional, enterprise-grade landing page that effectively showcases NxConsole's unified multi-cloud management capabilities across all four operational pillars.

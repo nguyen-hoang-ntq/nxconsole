@@ -465,7 +465,7 @@ export const mockNotifications: Notification[] = [
     timestamp: new Date('2024-01-15T09:30:00Z'),
     read: false,
     actionRequired: true,
-    link: '/finops'
+    link: '/dashboard/cost-management'
   },
   {
     id: 'not-002',

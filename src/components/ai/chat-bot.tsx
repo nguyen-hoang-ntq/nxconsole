@@ -17,10 +17,15 @@ import {
   Shield,
   DollarSign,
   Server,
-  Sparkles
+  Sparkles,
+  AlertTriangle,
+  Database,
+  Globe,
+  CheckCircle
 } from 'lucide-react';
 import { ChatMessage } from '@/types';
 import { cn } from '@/lib/utils';
+import { ServiceIcon } from '@/components/icons/service-icons';
 
 interface ChatBotProps {
   className?: string;
@@ -59,34 +64,34 @@ const aiResponses = {
   ],
   security: [
     "I've analyzed your security posture and found these priority items:",
-    "🔴 **Critical**: 2 S3 buckets have public read access - immediate action required",
-    "🟡 **High**: 5 EC2 instances missing security patches",
-    "🟡 **Medium**: MFA not enabled for 3 IAM users",
-    "🟢 **Low**: 2 unused security groups can be cleaned up",
+    "• Critical: 2 S3 buckets have public read access - immediate action required",
+    "• High: 5 EC2 instances missing security patches",
+    "• Medium: MFA not enabled for 3 IAM users",
+    "• Low: 2 unused security groups can be cleaned up",
     "Would you like me to provide remediation steps for any of these issues?"
   ],
   resources: [
     "Here's what I found regarding underutilized resources:",
-    "📊 **Compute**: 4 instances with avg CPU <10% over last 30 days",
-    "💾 **Storage**: 250GB of unused EBS storage across 6 volumes", 
-    "🌐 **Network**: 2 load balancers with minimal traffic",
-    "📈 **Recommendation**: Consider rightsizing or scheduling these resources",
+    "• Compute: 4 instances with avg CPU <10% over last 30 days",
+    "• Storage: 250GB of unused EBS storage across 6 volumes", 
+    "• Network: 2 load balancers with minimal traffic",
+    "• Recommendation: Consider rightsizing or scheduling these resources",
     "I can help you create an optimization plan if you'd like."
   ],
   prediction: [
     "Based on current trends and usage patterns, here's my forecast:",
-    "📈 **Next Month Projection**: $48,200 (+5.5% from current)",
-    "🔍 **Key Drivers**: Increased EC2 usage in development environment",
-    "⚠️ **Budget Alert**: You're on track to exceed budget by 8%",
-    "💡 **Recommendations**: Consider implementing auto-scaling policies",
+    "• Next Month Projection: $48,200 (+5.5% from current)",
+    "• Key Drivers: Increased EC2 usage in development environment",
+    "• Budget Alert: You're on track to exceed budget by 8%",
+    "• Recommendations: Consider implementing auto-scaling policies",
     "Would you like me to suggest specific optimization strategies?"
   ],
   default: [
     "I'm here to help you with cloud management insights! I can assist with:",
-    "💰 Cost optimization and budget management",
-    "🔒 Security posture and compliance monitoring", 
-    "📊 Resource utilization and performance analysis",
-    "🔮 Predictive analytics and forecasting",
+    "• Cost optimization and budget management",
+    "• Security posture and compliance monitoring", 
+    "• Resource utilization and performance analysis",
+    "• Predictive analytics and forecasting",
     "What would you like to explore today?"
   ]
 };

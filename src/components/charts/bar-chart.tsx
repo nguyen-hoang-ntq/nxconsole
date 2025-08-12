@@ -3,6 +3,8 @@
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { ChartContainer } from './chart-container';
+import { getChartConfig } from '@/lib/chart-colors';
+import { useTheme } from '@/hooks/use-theme';
 
 interface BarChartComponentProps {
   data: Array<Record<string, string | number>>;
@@ -40,6 +42,9 @@ export function BarChartComponent({
   formatYAxis,
   layout = 'vertical'
 }: BarChartComponentProps) {
+  const { isDarkMode } = useTheme();
+  const chartConfig = getChartConfig(isDarkMode);
+
   const CustomTooltip = ({ active, payload, label }: {
     active?: boolean;
     payload?: Array<{ dataKey: string; value: string | number; color: string; name?: string }>;
@@ -47,7 +52,7 @@ export function BarChartComponent({
   }) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-background border border-border rounded-lg shadow-lg p-3">
+        <div style={chartConfig.tooltip.contentStyle}>
           <p className="font-medium text-sm">{formatXAxis ? formatXAxis(label!) : label}</p>
           {payload.map((entry, index: number) => (
             <p key={index} className="text-sm" style={{ color: entry.color }}>
@@ -68,24 +73,24 @@ export function BarChartComponent({
       <BarChart
         data={data}
         layout={layout}
-        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+        margin={chartConfig.margin}
       >
-        {showGrid && <CartesianGrid strokeDasharray="3 3" className="opacity-30" />}
+        {showGrid && <CartesianGrid strokeDasharray={chartConfig.grid.strokeDasharray} stroke={chartConfig.grid.stroke} />}
         <XAxis 
           dataKey={layout === 'vertical' ? xDataKey : undefined}
           type={layout === 'vertical' ? 'category' : 'number'}
           tickFormatter={formatXAxis}
-          tick={{ fontSize: 12 }}
-          axisLine={{ stroke: '#e2e8f0' }}
-          tickLine={{ stroke: '#e2e8f0' }}
+          tick={chartConfig.xAxis.tick}
+          axisLine={chartConfig.xAxis.axisLine}
+          tickLine={chartConfig.xAxis.tickLine}
         />
         <YAxis 
           dataKey={layout === 'horizontal' ? xDataKey : undefined}
           type={layout === 'vertical' ? 'number' : 'category'}
           tickFormatter={formatYAxis}
-          tick={{ fontSize: 12 }}
-          axisLine={{ stroke: '#e2e8f0' }}
-          tickLine={{ stroke: '#e2e8f0' }}
+          tick={chartConfig.yAxis.tick}
+          axisLine={chartConfig.yAxis.axisLine}
+          tickLine={chartConfig.yAxis.tickLine}
         />
         {showTooltip && <Tooltip content={<CustomTooltip />} />}
         {showLegend && <Legend />}

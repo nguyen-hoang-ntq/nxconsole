@@ -3,6 +3,8 @@
 import React from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { ChartContainer } from './chart-container';
+import { getChartConfig } from '@/lib/chart-colors';
+import { useTheme } from '@/hooks/use-theme';
 
 interface AreaChartComponentProps {
   data: Array<Record<string, string | number>>;
@@ -41,6 +43,9 @@ export function AreaChartComponent({
   formatYAxis,
   fillOpacity = 0.6
 }: AreaChartComponentProps) {
+  const { isDarkMode } = useTheme();
+  const chartConfig = getChartConfig(isDarkMode);
+
   const CustomTooltip = ({ active, payload, label }: {
     active?: boolean;
     payload?: Array<{ dataKey: string; value: string | number; color: string; name?: string }>;
@@ -48,7 +53,7 @@ export function AreaChartComponent({
   }) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-background border border-border rounded-lg shadow-lg p-3">
+        <div style={chartConfig.tooltip.contentStyle}>
           <p className="font-medium text-sm">{formatXAxis ? formatXAxis(label!) : label}</p>
           {payload.map((entry, index: number) => (
             <p key={index} className="text-sm" style={{ color: entry.color }}>
@@ -68,21 +73,21 @@ export function AreaChartComponent({
     <ResponsiveContainer width="100%" height={height}>
       <AreaChart
         data={data}
-        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+        margin={chartConfig.margin}
       >
-        {showGrid && <CartesianGrid strokeDasharray="3 3" className="opacity-30" />}
+        {showGrid && <CartesianGrid strokeDasharray={chartConfig.grid.strokeDasharray} stroke={chartConfig.grid.stroke} />}
         <XAxis 
           dataKey={xDataKey}
           tickFormatter={formatXAxis}
-          tick={{ fontSize: 12 }}
-          axisLine={{ stroke: '#e2e8f0' }}
-          tickLine={{ stroke: '#e2e8f0' }}
+          tick={chartConfig.xAxis.tick}
+          axisLine={chartConfig.xAxis.axisLine}
+          tickLine={chartConfig.xAxis.tickLine}
         />
         <YAxis 
           tickFormatter={formatYAxis}
-          tick={{ fontSize: 12 }}
-          axisLine={{ stroke: '#e2e8f0' }}
-          tickLine={{ stroke: '#e2e8f0' }}
+          tick={chartConfig.yAxis.tick}
+          axisLine={chartConfig.yAxis.axisLine}
+          tickLine={chartConfig.yAxis.tickLine}
         />
         {showTooltip && <Tooltip content={<CustomTooltip />} />}
         {showLegend && <Legend />}
@@ -96,7 +101,7 @@ export function AreaChartComponent({
             stroke={area.color}
             fill={area.color}
             fillOpacity={fillOpacity}
-            strokeWidth={area.strokeWidth || 2}
+            strokeWidth={area.strokeWidth || chartConfig.strokeWidth}
           />
         ))}
       </AreaChart>

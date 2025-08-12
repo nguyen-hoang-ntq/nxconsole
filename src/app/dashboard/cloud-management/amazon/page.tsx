@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { CloudIcon } from '@/components/icons/cloud-icons';
 import Link from 'next/link';
-import { ArrowRight, Server, Database, Code, DollarSign, Activity } from 'lucide-react';
+import { ArrowRight, Server, Database, Code, DollarSign, Activity, Monitor, HardDrive, Network } from 'lucide-react';
 
 const awsServices = [
   {
@@ -312,6 +312,44 @@ export default function AmazonPage() {
             </CardContent>
           </Card>
         </div>
+      </div>
+
+      {/* Navigation Bridges to Resource Management */}
+      <div className="mt-8">
+        <Card>
+          <CardHeader>
+            <CardTitle>Resource Monitoring</CardTitle>
+            <CardDescription>Monitor and manage your AWS resources</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <Link href="/dashboard/resource-management/compute">
+                <Button variant="outline" className="h-16 flex-col w-full">
+                  <Server className="w-5 h-5 mb-1" />
+                  <span className="text-xs">Compute Resources</span>
+                </Button>
+              </Link>
+              <Link href="/dashboard/resource-management/storage">
+                <Button variant="outline" className="h-16 flex-col w-full">
+                  <HardDrive className="w-5 h-5 mb-1" />
+                  <span className="text-xs">Storage Resources</span>
+                </Button>
+              </Link>
+              <Link href="/dashboard/resource-management/networking">
+                <Button variant="outline" className="h-16 flex-col w-full">
+                  <Network className="w-5 h-5 mb-1" />
+                  <span className="text-xs">Network Resources</span>
+                </Button>
+              </Link>
+              <Link href="/dashboard/performance-monitoring/aws">
+                <Button variant="outline" className="h-16 flex-col w-full">
+                  <Monitor className="w-5 h-5 mb-1" />
+                  <span className="text-xs">Performance Monitor</span>
+                </Button>
+              </Link>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

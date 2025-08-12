@@ -3,6 +3,8 @@
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { ChartContainer } from './chart-container';
+import { getChartConfig, getChartColors } from '@/lib/chart-colors';
+import { useTheme } from '@/hooks/use-theme';
 
 interface LineChartComponentProps {
   data: Array<Record<string, string | number>>;
@@ -10,7 +12,7 @@ interface LineChartComponentProps {
   lines: {
     dataKey: string;
     name: string;
-    color: string;
+    color?: string;
     strokeWidth?: number;
     strokeDasharray?: string;
   }[];
@@ -20,6 +22,7 @@ interface LineChartComponentProps {
   showLegend?: boolean;
   showTooltip?: boolean;
   showExport?: boolean;
+  colorScheme?: keyof typeof import('@/lib/chart-colors').chartColorSchemes;
   formatTooltip?: (value: string | number, name: string) => [string, string];
   formatXAxis?: (value: string | number) => string;
   formatYAxis?: (value: string | number) => string;
@@ -36,11 +39,23 @@ export function LineChartComponent({
   showLegend = true,
   showTooltip = true,
   showExport = false,
+  colorScheme = 'primary',
   formatTooltip,
   formatXAxis,
   formatYAxis,
   onPointClick
 }: LineChartComponentProps) {
+  const { isDarkMode } = useTheme();
+  const chartConfig = getChartConfig(isDarkMode);
+
+  // Auto-assign colors if not provided
+  const colors = getChartColors(colorScheme);
+  const colorArray = Array.isArray(colors) ? colors : Object.values(colors);
+  const linesWithColors = lines.map((line, index) => ({
+    ...line,
+    color: line.color || colorArray[index % colorArray.length]
+  }));
+  
   const CustomTooltip = ({ active, payload, label }: {
     active?: boolean;
     payload?: Array<{ dataKey: string; value: string | number; color: string; name?: string }>;
@@ -48,7 +63,7 @@ export function LineChartComponent({
   }) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-background border border-border rounded-lg shadow-lg p-3">
+        <div style={chartConfig.tooltip.contentStyle}>
           <p className="font-medium text-sm">{formatXAxis ? formatXAxis(label!) : label}</p>
           {payload.map((entry, index: number) => (
             <p key={index} className="text-sm" style={{ color: entry.color }}>
@@ -68,35 +83,35 @@ export function LineChartComponent({
     <ResponsiveContainer width="100%" height={height}>
       <LineChart
         data={data}
-        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+        margin={chartConfig.margin}
       >
-        {showGrid && <CartesianGrid strokeDasharray="3 3" className="opacity-30" />}
+        {showGrid && <CartesianGrid strokeDasharray={chartConfig.grid.strokeDasharray} stroke={chartConfig.grid.stroke} />}
         <XAxis 
           dataKey={xDataKey}
           tickFormatter={formatXAxis}
-          tick={{ fontSize: 12 }}
-          axisLine={{ stroke: '#e2e8f0' }}
-          tickLine={{ stroke: '#e2e8f0' }}
+          tick={chartConfig.xAxis.tick}
+          axisLine={chartConfig.xAxis.axisLine}
+          tickLine={chartConfig.xAxis.tickLine}
         />
         <YAxis 
           tickFormatter={formatYAxis}
-          tick={{ fontSize: 12 }}
-          axisLine={{ stroke: '#e2e8f0' }}
-          tickLine={{ stroke: '#e2e8f0' }}
+          tick={chartConfig.yAxis.tick}
+          axisLine={chartConfig.yAxis.axisLine}
+          tickLine={chartConfig.yAxis.tickLine}
         />
         {showTooltip && <Tooltip content={<CustomTooltip />} />}
         {showLegend && <Legend />}
-        {lines.map((line, index) => (
+        {linesWithColors.map((line, index) => (
           <Line
             key={index}
             type="monotone"
             dataKey={line.dataKey}
             name={line.name}
             stroke={line.color}
-            strokeWidth={line.strokeWidth || 2}
+            strokeWidth={line.strokeWidth || chartConfig.strokeWidth}
             strokeDasharray={line.strokeDasharray}
-            dot={{ r: 4 }}
-            activeDot={{ r: 6 }}
+            dot={chartConfig.dot}
+            activeDot={chartConfig.activeDot}
           />
         ))}
       </LineChart>

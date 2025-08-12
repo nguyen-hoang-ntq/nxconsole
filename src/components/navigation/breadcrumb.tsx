@@ -14,7 +14,7 @@ interface BreadcrumbItem {
 
 const routeMap: Record<string, string> = {
   'dashboard': 'Dashboard',
-  'finops': 'FinOps & Cost Management',
+  'cost-management': 'Cost Management',
   'resources': 'Resource Management', 
   'ai-insights': 'AI Insights',
   'security': 'Security & Compliance',

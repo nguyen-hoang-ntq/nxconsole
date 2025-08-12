@@ -15,7 +15,9 @@ import {
   KeyRound,
   User,
   Settings,
-  BookOpen
+  BookOpen,
+  Phone,
+  BarChart3
 } from 'lucide-react';
 
 interface ErrorPageProps {
@@ -138,7 +140,7 @@ export default function ErrorPage({
                 </Link>
               )}
               
-              <Link href="/dashboard/user-management" className="block">
+              <Link href="/dashboard/users" className="block">
                 <Button variant="outline" className="w-full h-16 flex-col">
                   <User className="h-6 w-6 mb-2" />
                   Profile
@@ -197,13 +199,16 @@ export default function ErrorPage({
                 📧 support@nxconsole.com
               </Button>
               <Button variant="link" size="sm">
-                📞 +1 (555) 123-4567
+                <Phone className="w-4 h-4 mr-1" />
+                +1 (555) 123-4567
               </Button>
               <Button variant="link" size="sm">
-                💬 Live Chat Support
+                <MessageCircle className="w-4 h-4 mr-1" />
+                Live Chat Support
               </Button>
               <Button variant="link" size="sm">
-                📊 System Status
+                <BarChart3 className="w-4 h-4 mr-1" />
+                System Status
               </Button>
             </div>
           </CardContent>

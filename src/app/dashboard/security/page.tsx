@@ -15,6 +15,7 @@ import {
 import { SecurityDashboard } from '@/components/security/security-dashboard';
 import { AuditTrail } from '@/components/security/audit-trail';
 import { mockSecurityFindings, mockAuditEvents } from '@/lib/mock-data';
+import { AIInsightsWidget } from '@/components/ai/ai-insights-widget';
 
 export default function SecurityPage() {
   const [loading, setLoading] = useState(false);
@@ -52,8 +53,8 @@ export default function SecurityPage() {
         </div>
       </div>
 
-      {/* Security Overview Cards */}
-      <div className="grid gap-4 md:grid-cols-4">
+      {/* Security Overview Cards & AI Insights */}
+      <div className="grid gap-4 md:grid-cols-4 lg:grid-cols-5">
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center">
@@ -101,6 +102,15 @@ export default function SecurityPage() {
             </div>
           </CardContent>
         </Card>
+
+        {/* AI Security Insights */}
+        <div className="lg:col-span-1">
+          <AIInsightsWidget 
+            pillar="security-compliance"
+            maxInsights={2}
+            showRefresh={true}
+          />
+        </div>
       </div>
 
       {/* Main Content Tabs */}

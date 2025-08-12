@@ -50,6 +50,8 @@ import {
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { MetricCard } from '@/components/dashboard/metric-card';
+import { PillarSummaryCards } from '@/components/dashboard/pillar-summary-cards';
+import { EnhancedDashboardWidgets } from '@/components/dashboard/enhanced-dashboard-widgets';
 import { ChartContainer } from '@/components/charts/chart-container';
 import { CloudDashboardWidgets } from '@/components/charts/cloud-dashboard-widgets';
 import { LoadingState } from '@/components/shared/loading-state';
@@ -72,7 +74,8 @@ import {
   Monitor,
   Zap,
   Cloud,
-  Lock
+  Lock,
+  Building2
 } from 'lucide-react';
 import { 
   ResponsiveContainer, 
@@ -88,9 +91,13 @@ import {
   ComposedChart
 } from 'recharts';
 import { mockData, generateMockMetrics, generateMockCostHistory } from '@/lib/mock-data';
+import { getChartConfig } from '@/lib/chart-colors';
+import { useTheme } from '@/hooks/use-theme';
 import Link from 'next/link';
 
 export default function DashboardPage() {
+  const { isDarkMode } = useTheme();
+  const chartConfig = getChartConfig(isDarkMode);
   const [loading, setLoading] = useState(true);
   const [metrics, setMetrics] = useState<DashboardMetrics | null>(null);
   const [performanceData, setPerformanceData] = useState<PerformanceDataPoint[]>([]);
@@ -98,13 +105,25 @@ export default function DashboardPage() {
   const [forecastData, setForecastData] = useState<ForecastDataPoint[]>([]);
   const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
   const [dashboardConfig, setDashboardConfig] = useState({
-    showMetrics: true,
-    showCostTrends: true,
-    showPerformance: true,
-    showUptime: true,
+    // Core 4-Pillar Sections
+    showCostManagement: true,
+    showResourceManagement: true,
+    showPerformanceMonitoring: true,
+    showSecurityCompliance: true,
+    
+    // Analytics & Insights
+    showCrossImpliedAnalytics: true,
+    showPillarTrends: true,
     showForecasting: true,
-    showCloudWidgets: true,
-    showSystemHealth: true
+    
+    // Cloud Provider Integration
+    showCloudProviderWidgets: true,
+    showMultiCloudOverview: true,
+    
+    // System Monitoring
+    showSystemHealth: true,
+    showRealTimeMetrics: true,
+    showAlerts: true
   });
   
   // Toast hooks
@@ -253,49 +272,91 @@ export default function DashboardPage() {
                 </DialogDescription>
               </DialogHeader>
               <div className="space-y-6 py-4">
-                {/* Core Widgets Section */}
+                {/* 4-Pillar Management Sections */}
                 <div className="space-y-3">
                   <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
-                    Core Widgets (Required)
+                    4-Pillar Management Platform
                   </h4>
                   
-                  <div className="flex items-center justify-between p-3 bg-muted/30 rounded-lg">
-                    <Label htmlFor="metrics" className="flex items-center gap-3">
-                      <Gauge className="h-4 w-4 text-blue-600" />
+                  <div className="flex items-center justify-between p-3 bg-blue-50 dark:bg-blue-950/20 rounded-lg border-l-4 border-blue-500">
+                    <Label htmlFor="cost-management" className="flex items-center gap-3">
+                      <DollarSign className="h-4 w-4 text-blue-600" />
                       <div className="flex flex-col">
-                        <span className="font-medium">Key Metrics</span>
-                        <span className="text-sm text-muted-foreground">Cost, resources, security overview</span>
-                      </div>
-                    </Label>
-                    <div className="flex items-center gap-2">
-                      <Lock className="h-3 w-3 text-muted-foreground" />
-                      <Switch
-                        id="metrics"
-                        checked={true}
-                        disabled={true}
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Analytics & Charts Section */}
-                <div className="space-y-3">
-                  <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
-                    Analytics & Charts
-                  </h4>
-                  
-                  <div className="flex items-center justify-between p-3 border rounded-lg hover:bg-muted/20 transition-colors">
-                    <Label htmlFor="cost-trends" className="flex items-center gap-3 cursor-pointer">
-                      <BarChart3 className="h-4 w-4 text-green-600" />
-                      <div className="flex flex-col">
-                        <span className="font-medium">Resource Utilization</span>
-                        <span className="text-sm text-muted-foreground">Cloud resource usage across providers</span>
+                        <span className="font-medium">Cost Management</span>
+                        <span className="text-sm text-muted-foreground">Financial optimization across all cloud providers</span>
                       </div>
                     </Label>
                     <Switch
-                      id="cost-trends"
-                      checked={dashboardConfig.showCostTrends}
-                      onCheckedChange={(checked) => handleConfigChange('showCostTrends', checked)}
+                      id="cost-management"
+                      checked={dashboardConfig.showCostManagement}
+                      onCheckedChange={(checked) => handleConfigChange('showCostManagement', checked)}
+                    />
+                  </div>
+
+                  <div className="flex items-center justify-between p-3 bg-green-50 dark:bg-green-950/20 rounded-lg border-l-4 border-green-500">
+                    <Label htmlFor="resource-management" className="flex items-center gap-3">
+                      <Server className="h-4 w-4 text-green-600" />
+                      <div className="flex flex-col">
+                        <span className="font-medium">Resource Management</span>
+                        <span className="text-sm text-muted-foreground">Asset lifecycle and provisioning management</span>
+                      </div>
+                    </Label>
+                    <Switch
+                      id="resource-management"
+                      checked={dashboardConfig.showResourceManagement}
+                      onCheckedChange={(checked) => handleConfigChange('showResourceManagement', checked)}
+                    />
+                  </div>
+
+                  <div className="flex items-center justify-between p-3 bg-red-50 dark:bg-red-950/20 rounded-lg border-l-4 border-red-500">
+                    <Label htmlFor="performance-monitoring" className="flex items-center gap-3">
+                      <Activity className="h-4 w-4 text-red-600" />
+                      <div className="flex flex-col">
+                        <span className="font-medium">Performance Monitoring</span>
+                        <span className="text-sm text-muted-foreground">Real-time system performance and alerts</span>
+                      </div>
+                    </Label>
+                    <Switch
+                      id="performance-monitoring"
+                      checked={dashboardConfig.showPerformanceMonitoring}
+                      onCheckedChange={(checked) => handleConfigChange('showPerformanceMonitoring', checked)}
+                    />
+                  </div>
+
+                  <div className="flex items-center justify-between p-3 bg-purple-50 dark:bg-purple-950/20 rounded-lg border-l-4 border-purple-500">
+                    <Label htmlFor="security-compliance" className="flex items-center gap-3">
+                      <Shield className="h-4 w-4 text-purple-600" />
+                      <div className="flex flex-col">
+                        <span className="font-medium">Security & Compliance</span>
+                        <span className="text-sm text-muted-foreground">Governance, risk management, and compliance monitoring</span>
+                      </div>
+                    </Label>
+                    <Switch
+                      id="security-compliance"
+                      checked={dashboardConfig.showSecurityCompliance}
+                      onCheckedChange={(checked) => handleConfigChange('showSecurityCompliance', checked)}
+                    />
+                  </div>
+                </div>
+
+                {/* Cross-Pillar Analytics */}
+                <div className="space-y-3">
+                  <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
+                    Cross-Pillar Analytics
+                  </h4>
+                  
+                  <div className="flex items-center justify-between p-3 border rounded-lg hover:bg-muted/20 transition-colors">
+                    <Label htmlFor="pillar-trends" className="flex items-center gap-3 cursor-pointer">
+                      <BarChart3 className="h-4 w-4 text-indigo-600" />
+                      <div className="flex flex-col">
+                        <span className="font-medium">Pillar Trends & Analytics</span>
+                        <span className="text-sm text-muted-foreground">Cross-pillar insights and trend analysis</span>
+                      </div>
+                    </Label>
+                    <Switch
+                      id="pillar-trends"
+                      checked={dashboardConfig.showPillarTrends}
+                      onCheckedChange={(checked) => handleConfigChange('showPillarTrends', checked)}
                     />
                   </div>
                   
@@ -303,8 +364,8 @@ export default function DashboardPage() {
                     <Label htmlFor="forecasting" className="flex items-center gap-3 cursor-pointer">
                       <TrendingUp className="h-4 w-4 text-purple-600" />
                       <div className="flex flex-col">
-                        <span className="font-medium">Cost Forecasting</span>
-                        <span className="text-sm text-muted-foreground">Future cost predictions</span>
+                        <span className="font-medium">Predictive Analytics</span>
+                        <span className="text-sm text-muted-foreground">AI-powered forecasting across all pillars</span>
                       </div>
                     </Label>
                     <Switch
@@ -315,61 +376,76 @@ export default function DashboardPage() {
                   </div>
                 </div>
 
-                {/* System Monitoring Section */}
+                {/* Multi-Cloud Integration */}
                 <div className="space-y-3">
                   <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
-                    System Monitoring
-                  </h4>
-                  
-                  <div className="flex items-center justify-between p-3 border rounded-lg hover:bg-muted/20 transition-colors">
-                    <Label htmlFor="performance" className="flex items-center gap-3 cursor-pointer">
-                      <Monitor className="h-4 w-4 text-orange-600" />
-                      <div className="flex flex-col">
-                        <span className="font-medium">System Performance</span>
-                        <span className="text-sm text-muted-foreground">CPU, memory, network monitoring</span>
-                      </div>
-                    </Label>
-                    <Switch
-                      id="performance"
-                      checked={dashboardConfig.showPerformance}
-                      onCheckedChange={(checked) => handleConfigChange('showPerformance', checked)}
-                    />
-                  </div>
-                  
-                  <div className="flex items-center justify-between p-3 border rounded-lg hover:bg-muted/20 transition-colors">
-                    <Label htmlFor="uptime" className="flex items-center gap-3 cursor-pointer">
-                      <Zap className="h-4 w-4 text-yellow-600" />
-                      <div className="flex flex-col">
-                        <span className="font-medium">Service Uptime</span>
-                        <span className="text-sm text-muted-foreground">Service availability metrics</span>
-                      </div>
-                    </Label>
-                    <Switch
-                      id="uptime"
-                      checked={dashboardConfig.showUptime}
-                      onCheckedChange={(checked) => handleConfigChange('showUptime', checked)}
-                    />
-                  </div>
-                </div>
-
-                {/* Cloud Provider Widgets Section */}
-                <div className="space-y-3">
-                  <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
-                    Cloud Provider Widgets
+                    Multi-Cloud Integration
                   </h4>
                   
                   <div className="flex items-center justify-between p-3 border rounded-lg hover:bg-muted/20 transition-colors">
                     <Label htmlFor="cloud-widgets" className="flex items-center gap-3 cursor-pointer">
                       <Cloud className="h-4 w-4 text-cyan-600" />
                       <div className="flex flex-col">
-                        <span className="font-medium">Cloud Provider Dashboards</span>
-                        <span className="text-sm text-muted-foreground">AWS, Azure, GCP, M365 widgets</span>
+                        <span className="font-medium">Cloud Provider Widgets</span>
+                        <span className="text-sm text-muted-foreground">AWS, Azure, GCP, M365 integrated dashboards</span>
                       </div>
                     </Label>
                     <Switch
                       id="cloud-widgets"
-                      checked={dashboardConfig.showCloudWidgets}
-                      onCheckedChange={(checked) => handleConfigChange('showCloudWidgets', checked)}
+                      checked={dashboardConfig.showCloudProviderWidgets}
+                      onCheckedChange={(checked) => handleConfigChange('showCloudProviderWidgets', checked)}
+                    />
+                  </div>
+
+                  <div className="flex items-center justify-between p-3 border rounded-lg hover:bg-muted/20 transition-colors">
+                    <Label htmlFor="multi-cloud" className="flex items-center gap-3 cursor-pointer">
+                      <Building2 className="h-4 w-4 text-slate-600" />
+                      <div className="flex flex-col">
+                        <span className="font-medium">Multi-Cloud Overview</span>
+                        <span className="text-sm text-muted-foreground">Unified view across all cloud environments</span>
+                      </div>
+                    </Label>
+                    <Switch
+                      id="multi-cloud"
+                      checked={dashboardConfig.showMultiCloudOverview}
+                      onCheckedChange={(checked) => handleConfigChange('showMultiCloudOverview', checked)}
+                    />
+                  </div>
+                </div>
+
+                {/* System Health & Monitoring */}
+                <div className="space-y-3">
+                  <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
+                    System Health & Monitoring
+                  </h4>
+                  
+                  <div className="flex items-center justify-between p-3 border rounded-lg hover:bg-muted/20 transition-colors">
+                    <Label htmlFor="real-time" className="flex items-center gap-3 cursor-pointer">
+                      <Monitor className="h-4 w-4 text-orange-600" />
+                      <div className="flex flex-col">
+                        <span className="font-medium">Real-time Metrics</span>
+                        <span className="text-sm text-muted-foreground">Live system performance monitoring</span>
+                      </div>
+                    </Label>
+                    <Switch
+                      id="real-time"
+                      checked={dashboardConfig.showRealTimeMetrics}
+                      onCheckedChange={(checked) => handleConfigChange('showRealTimeMetrics', checked)}
+                    />
+                  </div>
+                  
+                  <div className="flex items-center justify-between p-3 border rounded-lg hover:bg-muted/20 transition-colors">
+                    <Label htmlFor="alerts" className="flex items-center gap-3 cursor-pointer">
+                      <Bell className="h-4 w-4 text-yellow-600" />
+                      <div className="flex flex-col">
+                        <span className="font-medium">Alerts & Notifications</span>
+                        <span className="text-sm text-muted-foreground">Smart alerting across all operational domains</span>
+                      </div>
+                    </Label>
+                    <Switch
+                      id="alerts"
+                      checked={dashboardConfig.showAlerts}
+                      onCheckedChange={(checked) => handleConfigChange('showAlerts', checked)}
                     />
                   </div>
                 </div>
@@ -408,8 +484,11 @@ export default function DashboardPage() {
         </div>
       </div>
       
+      {/* Pillar Summary Cards */}
+      <PillarSummaryCards loading={loading} />
+      
       {/* Key Metrics */}
-      {dashboardConfig.showMetrics && (
+      {(dashboardConfig.showCostManagement || dashboardConfig.showResourceManagement || dashboardConfig.showPerformanceMonitoring || dashboardConfig.showSecurityCompliance) && (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <MetricCard
           title="Total Monthly Cost"
@@ -465,8 +544,11 @@ export default function DashboardPage() {
         </div>
       )}
       
+      {/* Enhanced Dashboard Widgets */}
+      <EnhancedDashboardWidgets loading={loading} />
+      
       {/* Cloud Provider Widgets */}
-      {dashboardConfig.showCloudWidgets && (
+      {dashboardConfig.showCloudProviderWidgets && (
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold">Cloud Providers Overview</h2>
@@ -655,7 +737,7 @@ export default function DashboardPage() {
         
         <div className="grid gap-6 md:grid-cols-2">
           {/* Resource Utilization Chart */}
-          {dashboardConfig.showCostTrends && (
+          {dashboardConfig.showPillarTrends && (
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
@@ -672,38 +754,32 @@ export default function DashboardPage() {
                     { provider: 'GCP', cpu: 58, memory: 61, storage: 73, cost: 1200 },
                     { provider: 'M365', cpu: 45, memory: 52, storage: 48, cost: 800 },
                   ]}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                    <CartesianGrid strokeDasharray={chartConfig.grid.strokeDasharray} stroke={chartConfig.grid.stroke} />
                     <XAxis 
                       dataKey="provider" 
-                      tick={{ fontSize: 12, fill: 'hsl(var(--foreground))' }}
-                      tickLine={false}
-                      axisLine={false}
+                      tick={chartConfig.xAxis.tick}
+                      tickLine={chartConfig.xAxis.tickLine}
+                      axisLine={chartConfig.xAxis.axisLine}
                       label={{ value: 'Cloud Providers', position: 'insideBottom', offset: -5, style: { textAnchor: 'middle', fill: 'hsl(var(--foreground))', fontSize: 12, fontWeight: 600 } }}
                     />
                     <YAxis 
                       yAxisId="left"
-                      tick={{ fontSize: 12, fill: 'hsl(var(--foreground))' }}
-                      tickLine={false}
-                      axisLine={false}
+                      tick={chartConfig.yAxis.tick}
+                      tickLine={chartConfig.yAxis.tickLine}
+                      axisLine={chartConfig.yAxis.axisLine}
                       domain={[0, 100]}
                       label={{ value: 'Utilization (%)', angle: -90, position: 'insideLeft', style: { textAnchor: 'middle', fill: 'hsl(var(--foreground))', fontSize: 12, fontWeight: 600 } }}
                     />
                     <YAxis 
                       yAxisId="right"
                       orientation="right"
-                      tick={{ fontSize: 12, fill: 'hsl(var(--foreground))' }}
-                      tickLine={false}
-                      axisLine={false}
+                      tick={chartConfig.yAxis.tick}
+                      tickLine={chartConfig.yAxis.tickLine}
+                      axisLine={chartConfig.yAxis.axisLine}
                       label={{ value: 'Cost (USD)', angle: 90, position: 'insideRight', style: { textAnchor: 'middle', fill: 'hsl(var(--foreground))', fontSize: 12, fontWeight: 600 } }}
                     />
                     <Tooltip 
-                      contentStyle={{
-                        backgroundColor: 'hsl(var(--popover))',
-                        border: '1px solid hsl(var(--border))',
-                        borderRadius: '8px',
-                        boxShadow: '0 4px 12px rgb(0 0 0 / 0.15)',
-                        backdropFilter: 'none'
-                      }}
+                      contentStyle={chartConfig.tooltip.contentStyle}
                       labelStyle={{ color: 'hsl(var(--popover-foreground))', fontWeight: 600 }}
                       itemStyle={{ color: 'hsl(var(--popover-foreground))' }}
                       formatter={(value, name) => {
@@ -723,7 +799,7 @@ export default function DashboardPage() {
           )}
           
           {/* System Performance Chart */}
-          {dashboardConfig.showPerformance && (
+          {dashboardConfig.showRealTimeMetrics && (
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
@@ -751,8 +827,8 @@ export default function DashboardPage() {
                     />
                     <Tooltip 
                       contentStyle={{
-                        backgroundColor: 'hsl(var(--popover))',
-                        border: '1px solid hsl(var(--border))',
+                        backgroundColor: 'white',
+                    border: '1px solid hsl(var(--border))',
                         borderRadius: '8px',
                         boxShadow: '0 4px 12px rgb(0 0 0 / 0.15)',
                         backdropFilter: 'none'
@@ -798,7 +874,7 @@ export default function DashboardPage() {
         {/* Additional Operational Monitoring Charts */}
         <div className="grid gap-6 md:grid-cols-2 mt-6">
           {/* Service Uptime Chart */}
-          {dashboardConfig.showUptime && (
+          {dashboardConfig.showSystemHealth && (
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
@@ -830,8 +906,8 @@ export default function DashboardPage() {
                     />
                     <Tooltip 
                       contentStyle={{
-                        backgroundColor: 'hsl(var(--popover))',
-                        border: '1px solid hsl(var(--border))',
+                        backgroundColor: 'white',
+                    border: '1px solid hsl(var(--border))',
                         borderRadius: '8px',
                         boxShadow: '0 4px 12px rgb(0 0 0 / 0.15)',
                         backdropFilter: 'none'
@@ -880,8 +956,8 @@ export default function DashboardPage() {
                     />
                     <Tooltip 
                       contentStyle={{
-                        backgroundColor: 'hsl(var(--popover))',
-                        border: '1px solid hsl(var(--border))',
+                        backgroundColor: 'white',
+                    border: '1px solid hsl(var(--border))',
                         borderRadius: '8px',
                         boxShadow: '0 4px 12px rgb(0 0 0 / 0.15)',
                         backdropFilter: 'none'
@@ -926,7 +1002,7 @@ export default function DashboardPage() {
           <CardContent className="space-y-3">
             <div className="grid gap-2">
               <Button asChild variant="outline" className="justify-start">
-                <Link href="/dashboard/finops">
+                <Link href="/dashboard/cost-management">
                   <DollarSign className="mr-2 h-4 w-4" />
                   View Cost Analysis
                   <ExternalLink className="ml-auto h-3 w-3" />
@@ -1079,3 +1155,4 @@ export default function DashboardPage() {
     </div>
   );
 }
+

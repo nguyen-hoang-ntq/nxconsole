@@ -21,6 +21,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { CloudIcon } from '@/components/icons/cloud-icons';
 import { MetricWidget, ProgressWidget, StatusWidget } from './dashboard-widgets';
+import { useTheme } from '@/hooks/use-theme';
 
 interface CloudMetricWidgetProps {
   provider: 'microsoft' | 'amazon' | 'google';

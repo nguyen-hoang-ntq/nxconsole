@@ -29,6 +29,7 @@ import { useAuth } from '@/components/auth/auth-provider';
 import { mockNotifications } from '@/lib/mock-data';
 import { Breadcrumb } from '@/components/navigation/breadcrumb';
 import { LanguageSelector } from '@/components/ui/language-selector';
+import { layoutPatterns, navigation } from '@/lib/responsive-utils';
 
 interface AppHeaderProps {
   onMenuToggle?: () => void;
@@ -77,68 +78,70 @@ export function AppHeader({ onMenuToggle, showMenuButton = false }: AppHeaderPro
   };
   
   return (
-    <header className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
       {/* Top Header Bar */}
-      <div className="h-16 flex items-center justify-between px-4 gap-4">
+      <div className="h-14 md:h-16 flex items-center justify-between px-4 md:px-6 gap-2 md:gap-4">
         {/* Left Section */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 md:gap-4 flex-1 min-w-0">
           {showMenuButton && (
             <Button
               variant="ghost"
               size="sm"
               onClick={onMenuToggle}
-              className="md:hidden"
+              className={navigation.mobileMenu.combined}
             >
               <Menu className="h-5 w-5" />
             </Button>
           )}
           
           {/* Search */}
-          <div className="relative hidden md:block">
+          <div className="relative hidden md:block flex-1 max-w-md lg:max-w-lg xl:max-w-xl">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
-              placeholder="Search across all NxConsole services and resources..."
+              placeholder="Search across all NxConsole services..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 w-80 lg:w-96 xl:w-[500px]"
+              className="pl-10 w-full"
             />
           </div>
         </div>
         
         {/* Right Section */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 md:gap-2">
           {/* Mobile Search */}
-          <Button variant="ghost" size="sm" className="md:hidden">
-            <Search className="h-5 w-5" />
+          <Button variant="ghost" size="sm" className={navigation.mobileMenu.combined}>
+            <Search className="h-4 w-4 md:h-5 md:w-5" />
           </Button>
           
           {/* AI Assistant */}
-          <Button variant="ghost" size="sm" asChild>
+          <Button variant="ghost" size="sm" asChild className="hidden sm:inline-flex">
             <Link href="/dashboard/ai-assistant">
-              <Bot className="h-5 w-5" />
+              <Bot className="h-4 w-4 md:h-5 md:w-5" />
               <span className="sr-only">AI Assistant</span>
             </Link>
           </Button>
           
           {/* Language Selector */}
-          <LanguageSelector />
+          <div className="hidden md:block">
+            <LanguageSelector />
+          </div>
           
           {/* Notifications */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="sm" className="relative">
-                <Bell className="h-5 w-5" />
+                <Bell className="h-4 w-4 md:h-5 md:w-5" />
                 {unreadNotifications > 0 && (
                   <Badge 
                     variant="destructive" 
-                    className="absolute -top-1 -right-1 h-5 w-5 p-0 flex items-center justify-center text-xs"
+                    className="absolute -top-1 -right-1 h-4 w-4 md:h-5 md:w-5 p-0 flex items-center justify-center text-xs"
                   >
-                    {unreadNotifications}
+                    {unreadNotifications > 9 ? '9+' : unreadNotifications}
                   </Badge>
                 )}
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-80">
+            <DropdownMenuContent align="end" className="w-72 md:w-80">
               <DropdownMenuLabel className="flex items-center justify-between">
                 Notifications
                 {unreadNotifications > 0 && (
@@ -161,7 +164,7 @@ export function AppHeader({ onMenuToggle, showMenuButton = false }: AppHeaderPro
                     )}
                   </div>
                   <h4 className="font-medium text-sm mt-1">{notification.title}</h4>
-                  <p className="text-xs text-muted-foreground mt-1">{notification.message}</p>
+                  <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{notification.message}</p>
                   <p className="text-xs text-muted-foreground mt-1">
                     {notification.timestamp.toLocaleTimeString()}
                   </p>
@@ -169,25 +172,27 @@ export function AppHeader({ onMenuToggle, showMenuButton = false }: AppHeaderPro
               ))}
               <DropdownMenuSeparator />
               <DropdownMenuItem className="text-center">
-                View all notifications
+                <Link href="/dashboard/notifications" className="w-full">
+                  View all notifications
+                </Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
           
           {/* Theme Toggle */}
-          <Button variant="ghost" size="sm" onClick={toggleTheme}>
-            <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-            <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+          <Button variant="ghost" size="sm" onClick={toggleTheme} className="hidden sm:inline-flex">
+            <Sun className="h-4 w-4 md:h-5 md:w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+            <Moon className="absolute h-4 w-4 md:h-5 md:w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
             <span className="sr-only">Toggle theme</span>
           </Button>
           
           {/* User Menu */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="relative h-10 w-10 rounded-full">
-                <Avatar className="h-10 w-10">
+              <Button variant="ghost" className="relative h-8 w-8 md:h-10 md:w-10 rounded-full">
+                <Avatar className="h-8 w-8 md:h-10 md:w-10">
                   <AvatarImage src={state.user?.avatar} alt={state.user?.name} />
-                  <AvatarFallback>
+                  <AvatarFallback className="text-xs md:text-sm">
                     {state.user ? getInitials(state.user.name) : 'U'}
                   </AvatarFallback>
                 </Avatar>
@@ -221,6 +226,17 @@ export function AppHeader({ onMenuToggle, showMenuButton = false }: AppHeaderPro
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
+              <DropdownMenuItem className="md:hidden" asChild>
+                <Link href="/dashboard/ai-assistant">
+                  <Bot className="mr-2 h-4 w-4" />
+                  <span>AI Assistant</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem className="md:hidden" onClick={toggleTheme}>
+                <Moon className="mr-2 h-4 w-4" />
+                <span>Toggle theme</span>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator className="md:hidden" />
               <DropdownMenuItem onClick={handleLogout}>
                 <LogOut className="mr-2 h-4 w-4" />
                 <span>Log out</span>
@@ -231,7 +247,7 @@ export function AppHeader({ onMenuToggle, showMenuButton = false }: AppHeaderPro
       </div>
       
       {/* Breadcrumb Bar */}
-      <div className="border-t border-border bg-muted/30 px-4 py-2">
+      <div className={`border-t border-border bg-muted/30 px-4 md:px-6 py-2 ${navigation.breadcrumb.combined}`}>
         <Breadcrumb />
       </div>
     </header>

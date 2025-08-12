@@ -6,9 +6,11 @@ import { useAuth } from '@/components/auth/auth-provider';
 import { 
   LandingLayout,
   HeroSection,
-  FeaturesSection,
-  BenefitsSection,
-  PricingSection,
+  PillarShowcaseSection,
+  MultiCloudIntegrationSection,
+  OperationalBenefitsSection,
+  EnterpriseCapabilitiesSection,
+  SocialProofSection,
   AboutSection,
   CtaSection
 } from '@/components/landing';
@@ -45,9 +47,11 @@ export default function HomePage() {
     return (
       <LandingLayout>
         <HeroSection />
-        <FeaturesSection />
-        <BenefitsSection />
-        <PricingSection />
+        <PillarShowcaseSection />
+        <MultiCloudIntegrationSection />
+        <OperationalBenefitsSection />
+        <EnterpriseCapabilitiesSection />
+        <SocialProofSection />
         <AboutSection />
         <CtaSection />
       </LandingLayout>
